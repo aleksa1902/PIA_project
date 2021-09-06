@@ -1,0 +1,24 @@
+<b>welcome to the Olympics Log in site</b>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <input type='text' name='username' [(ngModel)]='username'>
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <input type='password' name='password' [(ngModel)]='password'>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Log In' (click)='loginToTheSystem()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='greska'>{{message}}</span>
