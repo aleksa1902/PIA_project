@@ -8,6 +8,7 @@ const cors_1 = __importDefault(require("cors"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const user_1 = __importDefault(require("./model/user"));
+const country_1 = __importDefault(require("./model/country"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
@@ -21,6 +22,31 @@ router.route('/loginToTheSystem').post((req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     user_1.default.findOne({ "username": username, "password": password }, (err, user) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(user);
+    });
+});
+router.route('/getAllCountries').get((req, res) => {
+    country_1.default.find({}, (err, countries) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(countries);
+    });
+});
+router.route('/register').get((req, res) => {
+    let newUser = new user_1.default(req.body);
+    newUser.save().then(e => {
+        res.status(200).json({ 'newUser': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'newUser': 'no' });
+    });
+});
+router.route('/findUsername').post((req, res) => {
+    let username = req.body.username;
+    user_1.default.findOne({ "username": username }, (err, user) => {
         if (err)
             console.log(err);
         else

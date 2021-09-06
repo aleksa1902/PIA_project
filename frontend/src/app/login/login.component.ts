@@ -37,5 +37,9 @@ import { UserService } from '../user.service';
         }
       })
     }
+
+    routerRegister(){
+      this.ruter.navigate(['register']);
+    }
   
   }

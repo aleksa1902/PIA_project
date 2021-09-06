@@ -1,0 +1,67 @@
+<b>welcome to the Olympics ! Register here</b>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input type='text' name='name' [(ngModel)]='name'>
+            </td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td>
+                <input type='text' name='surname' [(ngModel)]='surname'>
+            </td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>
+                <input type='text' name='email' [(ngModel)]='email'>
+            </td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td>
+                <input type='text' name='username' [(ngModel)]='username'>
+            </td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td>
+                <input type='password' name='password' [(ngModel)]='password'>
+            </td>
+        </tr>
+        <tr>
+            <td>Password again:</td>
+            <td>
+                <input type='password' name='passwordAgain' [(ngModel)]='passwordAgain'>
+            </td>
+        </tr>
+        <tr>
+            <td>Password again:</td>
+            <td>
+                <select name="countries" [(ngModel)]="country">
+                    <option *ngFor="let o of countries" value="{{o.name}}">
+                        {{o.name}}
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>User type:</td>
+            <td>
+                <select name="type" [(ngModel)]="userType">
+                    <option value="competitionDelegate">Competition delegate</option>
+                    <option value="headOfTheNationalDelegation">Head Of The National Delegation</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Log In' (click)='register()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='error'>{{message}}</span>

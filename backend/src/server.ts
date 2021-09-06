@@ -3,6 +3,7 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import user from './model/user';
+import country from './model/country';
 
 const app = express();
 
@@ -24,6 +25,32 @@ router.route('/loginToTheSystem').post((req, res)=>{
     let password = req.body.password;
 
     user.findOne({"username":username, "password": password}, (err, user)=>{
+        if(err) console.log(err);
+        else res.json(user);
+    })
+});
+
+router.route('/getAllCountries').get((req, res)=>{
+    country.find({}, (err, countries)=>{
+        if(err) console.log(err);
+        else res.json(countries);
+    })
+});
+
+router.route('/register').get((req, res)=>{
+    let newUser = new user(req.body);
+
+    newUser.save().then(e=>{
+        res.status(200).json({'newUser':'ok'});
+    }).catch(err=>{
+        res.status(400).json({'newUser':'no'});
+    })
+});
+
+router.route('/findUsername').post((req, res)=>{
+    let username = req.body.username;
+
+    user.findOne({"username":username}, (err, user)=>{
         if(err) console.log(err);
         else res.json(user);
     })

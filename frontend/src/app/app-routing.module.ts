@@ -4,6 +4,7 @@ import { CompetitionDelegateComponent } from './competitionDelegate/competitionD
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
 import { LoginComponent } from './login/login.component';
 import { OrganizerComponent } from './organizer/organizer.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {path: "", component: LoginComponent},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path: "organizer", component: OrganizerComponent},
   {path: "competitionDelegate", component: CompetitionDelegateComponent},
   {path: "headOfTheNationalDelegation", component: HeadOfTheNationalDelegationComponent},
+  {path: "register", component : RegisterComponent},
   {path: '**', component: LoginComponent}
 ];
 

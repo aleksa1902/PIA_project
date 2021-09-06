@@ -9,6 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { OrganizerComponent } from './organizer/organizer.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegat
     LoginComponent,
     OrganizerComponent,
     CompetitionDelegateComponent,
-    HeadOfTheNationalDelegationComponent
+    HeadOfTheNationalDelegationComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
