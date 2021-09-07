@@ -1,0 +1,28 @@
+
+
+<table id="dtBasicExample" class="table table-striped table-bordered table-sm">
+    <thead>
+        <tr>
+          <th class="th-sm">Flag</th>
+          <th class="th-sm">Name</th>
+          <th class="th-sm">Number of athlets</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of countries">
+            <td><img src="{{c.flagImgSrc}}" alt="{{c.name}}" class="img-thumbnail"></td>
+            <td>{{c.name}}</td>
+            <td>{{c.numberOfAthletes}}</td>
+        </tr>
+    </tbody>    
+</table>
+
+<script>
+    // Basic example
+    $(document).ready(function () {
+    $('#dtBasicExample').DataTable({
+        "paging": "simple_numbers" // false to disable pagination (or any other option)
+    });
+    $('.dataTables_length').addClass('bs-select');
+    });
+</script>

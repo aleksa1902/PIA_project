@@ -8,6 +8,21 @@ const Schema = mongoose_1.default.Schema;
 let Country = new Schema({
     name: {
         type: String
+    },
+    flagImgSrc: {
+        type: String
+    },
+    numberOfAthletes: {
+        type: Number
+    },
+    goldMedals: {
+        type: Number
+    },
+    silverMedals: {
+        type: Number
+    },
+    bronzeMedals: {
+        type: Number
     }
 });
 exports.default = mongoose_1.default.model('Country', Country, 'countries');

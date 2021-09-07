@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+          <th class="th-sm">Rang</th>
+          <th class="th-sm">Name</th>
+          <th class="th-sm">Gold medals</th>
+          <th class="th-sm">Sliver medals</th>
+          <th class="th-sm">Bronze medals</th>
+          <th class="th-sm">Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let c of countries">
+            <td>0</td>
+            <td>{{c.name}}</td>
+            <td>{{c.goldMedals}}</td>
+            <td>{{c.silverMedals}}</td>
+            <td>{{c.bronzeMedals}}</td>
+            <td>{{ c.goldMedals + c.silverMedals + c.bronzeMedals}}</td>
+        </tr>
+    </tbody>    
+</table>
+
+
+  
+  
