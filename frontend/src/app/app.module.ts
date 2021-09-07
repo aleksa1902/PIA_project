@@ -14,9 +14,6 @@ import { ChangePasswordComponent } from './changePassword/changepassword.compone
 import { ListCountriesComponent } from './listCountries/listcountries.component';
 import { ListMedalsComponent } from './listMedals/listmedals.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
 
 
 
@@ -37,10 +34,7 @@ import {MatTableDataSource} from '@angular/material/table';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NoopAnimationsModule,
-    MatPaginator,
-    MatSort,
-    MatTableDataSource
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
