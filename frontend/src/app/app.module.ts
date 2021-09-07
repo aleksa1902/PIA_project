@@ -10,6 +10,7 @@ import { OrganizerComponent } from './organizer/organizer.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
 import { RegisterComponent } from './register/register.component';
+import { ChangePasswordComponent } from './changePassword/changepassword.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RegisterComponent } from './register/register.component';
     OrganizerComponent,
     CompetitionDelegateComponent,
     HeadOfTheNationalDelegationComponent,
-    RegisterComponent
+    RegisterComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

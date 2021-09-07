@@ -36,7 +36,7 @@ router.route('/getAllCountries').get((req, res) => {
             res.json(countries);
     });
 });
-router.route('/register').get((req, res) => {
+router.route('/register').post((req, res) => {
     let newUser = new user_1.default(req.body);
     newUser.save().then(e => {
         res.status(200).json({ 'newUser': 'ok' });
@@ -51,6 +51,18 @@ router.route('/findUsername').post((req, res) => {
             console.log(err);
         else
             res.json(user);
+    });
+});
+router.route('/changePassword').post((req, res) => {
+    let username = req.body.username;
+    let newPassword = req.body.newPassword;
+    user_1.default.findOne({ "username": username }, (err, user) => {
+        if (err)
+            res.json({ "changePass": "greska" });
+        else {
+            user.collection.updateOne({ 'username': username }, { $set: { 'password': newPassword } });
+            res.json({ "changePass": "ok" });
+        }
     });
 });
 app.use('/', router);

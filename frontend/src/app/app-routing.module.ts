@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { ChangePasswordComponent } from './changePassword/changepassword.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
 import { LoginComponent } from './login/login.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: "competitionDelegate", component: CompetitionDelegateComponent},
   {path: "headOfTheNationalDelegation", component: HeadOfTheNationalDelegationComponent},
   {path: "register", component : RegisterComponent},
+  {path: "changePassword", component: ChangePasswordComponent},
   {path: '**', component: LoginComponent}
 ];
 

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../model/user.model';
-import { UserService } from '../user.service';
+import { UserService } from '../services/user.service';
+
 
 @Component({
     selector: 'app-login',
@@ -40,6 +41,10 @@ import { UserService } from '../user.service';
 
     routerRegister(){
       this.ruter.navigate(['register']);
+    }
+
+    changePassword(){
+      this.ruter.navigate(['changePassword']);
     }
   
   }
