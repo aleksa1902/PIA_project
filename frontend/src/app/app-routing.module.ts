@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { ChangePasswordComponent } from './changePassword/changepassword.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
+import { ListCountriesComponent } from './listCountries/listcountries.component';
+import { ListMedalsComponent } from './listMedals/listmedals.component';
 import { LoginComponent } from './login/login.component';
 import { OrganizerComponent } from './organizer/organizer.component';
 import { RegisterComponent } from './register/register.component';
@@ -15,11 +17,13 @@ const routes: Routes = [
   {path: "headOfTheNationalDelegation", component: HeadOfTheNationalDelegationComponent},
   {path: "register", component : RegisterComponent},
   {path: "changePassword", component: ChangePasswordComponent},
+  {path: "listCountries", component: ListCountriesComponent},
+  {path: "listMedals", component: ListMedalsComponent},
   {path: '**', component: LoginComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { relativeLinkResolution: 'legacy' })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -46,5 +46,13 @@ import { UserService } from '../services/user.service';
     changePassword(){
       this.ruter.navigate(['changePassword']);
     }
+
+    listCountries(){
+      this.ruter.navigate(['listCountries']);
+    }
+
+    listMedals(){
+      this.ruter.navigate(['listMedals']);
+    }
   
   }

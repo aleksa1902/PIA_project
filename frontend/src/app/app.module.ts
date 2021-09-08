@@ -11,6 +11,12 @@ import { CompetitionDelegateComponent } from './competitionDelegate/competitionD
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
 import { RegisterComponent } from './register/register.component';
 import { ChangePasswordComponent } from './changePassword/changepassword.component';
+import { ListCountriesComponent } from './listCountries/listcountries.component';
+import { ListMedalsComponent } from './listMedals/listmedals.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table'  
+
 
 @NgModule({
   declarations: [
@@ -20,13 +26,18 @@ import { ChangePasswordComponent } from './changePassword/changepassword.compone
     CompetitionDelegateComponent,
     HeadOfTheNationalDelegationComponent,
     RegisterComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    ListCountriesComponent,
+    ListMedalsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NoopAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
