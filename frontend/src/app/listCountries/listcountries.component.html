@@ -1,28 +1,33 @@
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Rang Column -->
+      <ng-container matColumnDef="flag">
+        <th mat-header-cell *matHeaderCellDef> Flag </th>
+        <td mat-cell *matCellDef="let element; let i = index;"> <img src="{{element.flagImgSrc}}" alt="{{element.name}}" class="img-thumbnail"> </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+  
+      <!-- Number of athlets Column -->
+      <ng-container matColumnDef="numberOfAthletes">
+        <th mat-header-cell *matHeaderCellDef> Number of athlets </th>
+        <td mat-cell *matCellDef="let element"> {{element.goldMedals}} </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]=[10]
+                   showFirstLastButtons 
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
 
-
-<table id="dtBasicExample" class="table table-striped table-bordered table-sm">
-    <thead>
-        <tr>
-          <th class="th-sm">Flag</th>
-          <th class="th-sm">Name</th>
-          <th class="th-sm">Number of athlets</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let c of countries">
-            <td><img src="{{c.flagImgSrc}}" alt="{{c.name}}" class="img-thumbnail"></td>
-            <td>{{c.name}}</td>
-            <td>{{c.numberOfAthletes}}</td>
-        </tr>
-    </tbody>    
-</table>
-
-<script>
-    // Basic example
-    $(document).ready(function () {
-    $('#dtBasicExample').DataTable({
-        "paging": "simple_numbers" // false to disable pagination (or any other option)
-    });
-    $('.dataTables_length').addClass('bs-select');
-    });
-</script>
+  
+  

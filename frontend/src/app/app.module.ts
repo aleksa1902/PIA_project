@@ -14,7 +14,8 @@ import { ChangePasswordComponent } from './changePassword/changepassword.compone
 import { ListCountriesComponent } from './listCountries/listcountries.component';
 import { ListMedalsComponent } from './listMedals/listmedals.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table'  
 
 
 @NgModule({
@@ -34,7 +35,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
