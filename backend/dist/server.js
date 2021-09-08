@@ -9,6 +9,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const mongoose_1 = __importDefault(require("mongoose"));
 const user_1 = __importDefault(require("./model/user"));
 const country_1 = __importDefault(require("./model/country"));
+const sport_1 = __importDefault(require("./model/sport"));
 const app = (0, express_1.default)();
 app.use((0, cors_1.default)());
 app.use(body_parser_1.default.json());
@@ -63,6 +64,26 @@ router.route('/changePassword').post((req, res) => {
             user.collection.updateOne({ 'username': username }, { $set: { 'password': newPassword } });
             res.json({ "changePass": "ok" });
         }
+    });
+});
+router.route('/addSport').post((req, res) => {
+    let newSport = new sport_1.default(req.body);
+    newSport.save().then(e => {
+        res.status(200).json({ 'newSport': 'ok' });
+    }).catch(err => {
+        res.status(400).json({ 'newSport': 'no' });
+    });
+});
+router.route('/findSportWithoutDiscipline').post((req, res) => {
+    let s = req.body.sport;
+    let type = req.body.type;
+    let min = req.body.min;
+    let max = req.body.max;
+    sport_1.default.findOne({ "sport": s, "type": type, "min": min, "max": max }, (err, sport) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(sport);
     });
 });
 app.use('/', router);

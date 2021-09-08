@@ -4,6 +4,8 @@ import bodyParser from 'body-parser'
 import mongoose from 'mongoose'
 import user from './model/user';
 import country from './model/country';
+import sport from './model/sport';
+
 
 const app = express();
 
@@ -67,6 +69,29 @@ router.route('/changePassword').post((req, res)=>{
             res.json({"changePass":"ok"});
         }
     })
+});
+
+router.route('/addSport').post((req, res)=>{
+    let newSport = new sport(req.body);
+
+    newSport.save().then(e=>{
+        res.status(200).json({'newSport':'ok'});
+    }).catch(err=>{
+        res.status(400).json({'newSport':'no'});
+    })
+});
+
+router.route('/findSportWithoutDiscipline').post((req, res)=>{
+    let s = req.body.sport;
+    let type = req.body.type;
+    let min = req.body.min;
+    let max = req.body.max;
+
+    sport.findOne({"sport":s, "type":type, "min":min, "max":max}, (err, sport)=>{
+        if(err) console.log(err);
+        else res.json(sport);
+    })
+    
 });
 
 app.use('/', router);

@@ -28,4 +28,8 @@ export class OrganizerComponent implements OnInit {
     this.ruter.navigate(['']);
   }
 
+  addSport(){
+    this.ruter.navigate(['addSport']);
+  }
+
 }

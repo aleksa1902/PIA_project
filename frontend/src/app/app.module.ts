@@ -16,6 +16,7 @@ import { ListMedalsComponent } from './listMedals/listmedals.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table'  
+import { AddSportComponent } from './addSport/addsport.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { MatTableModule } from '@angular/material/table'
     RegisterComponent,
     ChangePasswordComponent,
     ListCountriesComponent,
-    ListMedalsComponent
+    ListMedalsComponent,
+    AddSportComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,45 @@
+<b>welcome to the Olympics ! Add new sport</b>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Sport:</td>
+            <td>
+                <input type='text' name='sport' [(ngModel)]='sport'>
+            </td>
+        </tr>
+        <tr>
+            <td>Discipline:</td>
+            <td>
+                <input type='text' name='discipline' [(ngModel)]='discipline'>
+            </td>
+        </tr>
+        <tr>
+            <td>Type:</td>
+            <td>
+                <select name="type" [(ngModel)]="type">
+                    <option value="team">Team</option>
+                    <option value="individual">Individual</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Minimum:</td>
+            <td>
+                <input type='text' name='min' [(ngModel)]='min'>
+            </td>
+        </tr>
+        <tr>
+            <td>Maximum:</td>
+            <td>
+                <input type='text' name='max' [(ngModel)]='max'>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Add sport' (click)='addSport()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='error'>{{message}}</span>

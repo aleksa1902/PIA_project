@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AddSportComponent } from './addSport/addsport.component';
 import { ChangePasswordComponent } from './changePassword/changepassword.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: "changePassword", component: ChangePasswordComponent},
   {path: "listCountries", component: ListCountriesComponent},
   {path: "listMedals", component: ListMedalsComponent},
+  {path: "addSport", component: AddSportComponent},
   {path: '**', component: LoginComponent}
 ];
 
