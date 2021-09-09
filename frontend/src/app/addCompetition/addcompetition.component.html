@@ -1,0 +1,34 @@
+<b>welcome to the Olympics ! Add new competition</b>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Competition:</td>
+            <td>
+                <input type='text' name='competition' [(ngModel)]='competition'>
+            </td>
+        </tr>
+        <tr>
+            <td>Format:</td>
+            <td>
+                <input type='text' name='format' [(ngModel)]='format'>
+            </td>
+        </tr>
+        <tr>
+            <td>Sport:</td>
+            <td>
+                <select name="sports" [(ngModel)]="sport">
+                    <option *ngFor="let s of sports" value="{{s.sport}}">
+                        {{s.sport}}
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Add competition' (click)='addCompetition()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='error'>{{message}}</span>

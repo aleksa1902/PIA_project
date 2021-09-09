@@ -1,0 +1,43 @@
+<b>welcome to the Olympics ! Add new competition</b>
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Name:</td>
+            <td>
+                <input type='text' name='name' [(ngModel)]='name'>
+            </td>
+        </tr>
+        <tr>
+            <td>Surname:</td>
+            <td>
+                <input type='text' name='surname' [(ngModel)]='surname'>
+            </td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>
+                <select name="Gender" [(ngModel)]="gender">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Discipline:</td>
+            <td>
+                <select name="discipline" [(ngModel)]="discipline">
+                    <option *ngFor="let s of sports" value="{{s.discipline}}">
+                        {{s.sport}} - {{s.discipline}}
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Add athlete' (click)='addAthlete()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='error'>{{message}}</span>

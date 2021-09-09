@@ -32,4 +32,21 @@ export class SportService {
     return this.http.post(`${this.uri}/findSportWithoutDiscipline`, data);
   }
 
+  getAllSports(){
+    return this.http.get(`${this.uri}/getAllSports`);
+  }
+
+  addCompetition(competition, sport, format){
+    const data={
+      competition: competition,
+      sport: sport,
+      format: format,
+      date: null,
+      time: null,
+      athlets: null
+    }
+
+    return this.http.post(`${this.uri}/addCompetition`, data); 
+  }
+
 }

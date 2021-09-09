@@ -17,6 +17,9 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table'  
 import { AddSportComponent } from './addSport/addsport.component';
+import { AddAthleteComponent } from './addAthlete/addathlete.component';
+import { AddAthleteJSONComponent } from './addAthleteJson/addathletejson.component';
+import { FindAthleteComponent } from './findAthlete/findathlete.component';
 
 
 @NgModule({
@@ -30,7 +33,10 @@ import { AddSportComponent } from './addSport/addsport.component';
     ChangePasswordComponent,
     ListCountriesComponent,
     ListMedalsComponent,
-    AddSportComponent
+    AddSportComponent,
+    AddAthleteComponent,
+    AddAthleteJSONComponent,
+    FindAthleteComponent
   ],
   imports: [
     BrowserModule,

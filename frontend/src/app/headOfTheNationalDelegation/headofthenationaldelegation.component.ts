@@ -28,4 +28,12 @@ export class HeadOfTheNationalDelegationComponent implements OnInit {
     this.ruter.navigate(['']);
   }
 
+  addAthlete(){
+    this.ruter.navigate(['addAthlete']);
+  }
+
+  addAthleteJSON(){
+    this.ruter.navigate(['addAthleteJSON']);
+  }
+
 }
