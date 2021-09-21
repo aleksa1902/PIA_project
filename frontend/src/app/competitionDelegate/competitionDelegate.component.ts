@@ -1,24 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Competition } from '../model/competition.models';
 import { User } from '../model/user.model';
+import { CompetitionService } from '../services/competition.service';
+import { UserService } from '../services/user.service';
 
 @Component({
-  selector: 'app-competitionDelegate',
+  selector: 'app-competitiondelegate',
   templateUrl: './competitiondelegate.component.html'
 })
 export class CompetitionDelegateComponent implements OnInit {
-
-  constructor(private ruter: Router) { }
+  displayedColumns: string[] = ['competition', 'discipline', 'location', 'date', 'setDate', 'setResult'];
+  constructor(private serviceUser: UserService, private ruter: Router) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('registered'))
     if(this.user.userType != "competitionDelegate"){
       this.ruter.navigate(['login']);
     }
+    this.serviceUser.checkDelegate(this.user.username).subscribe((c: Competition[])=>{
+        this.dataSource = new MatTableDataSource<Competition>(c);
+    })
     
   }
 
   user: User;
+  dataSource: MatTableDataSource<Competition>;
 
   logout(){
     //this.user = null;
@@ -26,6 +34,12 @@ export class CompetitionDelegateComponent implements OnInit {
     console.log(localStorage.getItem('registered'));
 
     this.ruter.navigate(['']);
+  }
+
+  setDate(name){
+    localStorage.setItem('setDate', JSON.stringify(name));
+    console.log(name);
+    this.ruter.navigate(['dateCompetition']);
   }
 
 }

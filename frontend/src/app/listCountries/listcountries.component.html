@@ -4,7 +4,7 @@
       <!-- Rang Column -->
       <ng-container matColumnDef="flag">
         <th mat-header-cell *matHeaderCellDef> Flag </th>
-        <td mat-cell *matCellDef="let element; let i = index;"> <img src="{{element.flagImgSrc}}" alt="{{element.name}}" class="img-thumbnail"> </td>
+        <td mat-cell *matCellDef="let element; let i = index;"> <img src="{{element.flagImgSrc}}" alt="{{element.name}}" class="img-thumbnail" width="100" height="50"> </td>
       </ng-container>
   
       <!-- Name Column -->
@@ -16,7 +16,7 @@
       <!-- Number of athlets Column -->
       <ng-container matColumnDef="numberOfAthletes">
         <th mat-header-cell *matHeaderCellDef> Number of athlets </th>
-        <td mat-cell *matCellDef="let element"> {{element.goldMedals}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.numberOfAthletes}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

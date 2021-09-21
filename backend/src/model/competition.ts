@@ -9,18 +9,27 @@ let Competition = new Schema({
     sport: {
         type: String
     },
+    discipline: {
+        type: String
+    },
     format: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    location: {
         type: String
     },
     date: {
         type: Date
     },
-    time: {
+    delegate:{
         type: String
     },
-    athlets: {
-        type: Array<String>()
-    }
+    athletes: [{
+        type: String
+    }]
 })
 
 export default mongoose.model('Competition', Competition, 'competitions');

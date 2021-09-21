@@ -40,7 +40,7 @@ export class AddAthleteJSONComponent implements OnInit {
         reader.readAsText(this.file, "UTF-8");
         console.log(reader);
         reader.onload = () => {
-            console.log("OVDE SAM");
+          if(reader.result != null){
             console.log(JSON.parse(reader.result.toString()));
             let athletes = JSON.parse(reader.result.toString());
             if(athletes){
@@ -57,6 +57,9 @@ export class AddAthleteJSONComponent implements OnInit {
                     })
                 })
             }
+          }else{
+            console.log("NEMAM NIST");
+          }
         }
     }
   }

@@ -12,18 +12,27 @@ let Competition = new Schema({
     sport: {
         type: String
     },
+    discipline: {
+        type: String
+    },
     format: {
+        type: String
+    },
+    gender: {
+        type: String
+    },
+    location: {
         type: String
     },
     date: {
         type: Date
     },
-    time: {
+    delegate: {
         type: String
     },
-    athlets: {
-        type: Array()
-    }
+    athletes: [{
+            type: String
+        }]
 });
 exports.default = mongoose_1.default.model('Competition', Competition, 'competitions');
 //# sourceMappingURL=competition.js.map

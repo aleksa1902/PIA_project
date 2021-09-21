@@ -23,10 +23,6 @@ export class FindAthleteComponent implements OnInit {
   constructor(private serviceCountry: CountryService, private serviceSport: SportService, private serviceAthlete: AthleteService, private ruter: Router) { }
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('registered'))
-    if(this.user.userType != "organizer"){
-      this.ruter.navigate(['login']);
-    }
     this.serviceSport.getAllSports().subscribe((sports: Sport[])=>{
         this.sports = sports;
         //this.sports.forEach((s: Sport)=>{
@@ -45,7 +41,6 @@ export class FindAthleteComponent implements OnInit {
     })
   }
 
-  user: User;
   sports: Sport[];
   countries: Country[];
   message: string;

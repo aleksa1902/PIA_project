@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddAthleteComponent } from './addAthlete/addathlete.component';
 import { AddAthleteJSONComponent } from './addAthleteJson/addathletejson.component';
+import { AddCompetitionComponent } from './addCompetition/addCompetition.component';
 import { AddSportComponent } from './addSport/addsport.component';
 import { ChangePasswordComponent } from './changePassword/changepassword.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
+import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
 import { FindAthleteComponent } from './findAthlete/findathlete.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
 import { ListCountriesComponent } from './listCountries/listcountries.component';
@@ -27,6 +29,8 @@ const routes: Routes = [
   {path: "addAthlete", component: AddAthleteComponent},
   {path: "addAthleteJSON", component: AddAthleteJSONComponent},
   {path: "findAthlete", component: FindAthleteComponent},
+  {path: "addCompetition", component: AddCompetitionComponent},
+  {path: "dateCompetition", component: DateCompetitionComponent},
   {path: '**', component: LoginComponent}
 ];
 

@@ -1,0 +1,31 @@
+<b>welcome to the Olympics !</b>
+{{comp.competition}}
+<hr/>
+<form>
+    <table>
+        <tr>
+            <td>Location:</td>
+            <td>
+                <input type='text' name='location' [(ngModel)]='location'>
+            </td>
+        </tr>
+        <tr>
+            <td>Date:</td>
+            <td>
+                <input type="date" id="date" name="date" [(value)]='date' min="2021-01-01" max="2021-12-31" [(ngModel)]='date'>
+            </td>
+        </tr>
+        <tr>
+            <td>Time:</td>
+            <td>
+                <input type="time" id="appt" name="appt" [(ngModel)]='time' required>
+            </td>
+        </tr>
+        <tr>
+            <td colspan='2'>
+                <input type='button' value='Set date' (click)='setDate()'>
+            </td>
+        </tr>
+    </table>
+</form>
+<span class='error'>{{message}}</span>

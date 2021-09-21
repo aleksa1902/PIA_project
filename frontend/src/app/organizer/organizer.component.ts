@@ -36,4 +36,8 @@ export class OrganizerComponent implements OnInit {
     this.ruter.navigate(['findAthlete']);
   }
 
+  addCompetition(){
+    this.ruter.navigate(['addCompetition']);
+  }
+
 }

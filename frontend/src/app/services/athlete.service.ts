@@ -99,5 +99,20 @@ export class AthleteService {
     return this.http.post(`${this.uri}/getAthleteByNameSurnameSport`, data); 
   }
 
+  getAthleteBySportGender(sport, gender){
+    const data={
+      sport: sport,
+      gender: gender
+    }
+    return this.http.post(`${this.uri}/getAthleteBySportGender`, data); 
+  }
+
+  competitionStart(sportName, discipline){
+    const data={
+      sport: sportName,
+      discipline: discipline
+    }
+    return this.http.post(`${this.uri}/competitionStart`, data);
+  }
 
 }

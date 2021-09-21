@@ -114,6 +114,7 @@ router.route('/getAllSports').get((req, res)=>{
 // OVO PREUREDITI
 router.route('/addCompetition').post((req, res)=>{
     let newCompetition = new competition(req.body);
+    console.log(newCompetition);
 
     newCompetition.save().then(e=>{
         res.status(200).json({'newCompetition':'ok'});
@@ -161,7 +162,6 @@ router.route('/addDiscipline').post((req, res)=>{
 
 // Add new athlete
 router.route('/addAthlete').post((req, res)=>{
-    //let newAthlete = new athlete(req.body);
     let new_athlete = new athlete({
         name: req.body.name,
         surname: req.body.surname,
@@ -169,10 +169,19 @@ router.route('/addAthlete').post((req, res)=>{
         country: req.body.country,
         disciplines: [req.body.disciplines]
     });
-    console.log(new_athlete);
+    let coun = req.body.country;
+    //console.log(new_athlete);
+
     new_athlete.save().then(e=>{
         console.log("dodao sam");
-        res.status(200).json({'newAthlete':'ok'});
+        country.updateOne({name: coun}, {$inc: {'numberOfAthletes': 1}}, (e, r) => {
+            console.log(r);
+            if(e){
+                res.status(400).json({'newAthlete':'no'});
+            }else{
+                res.status(200).json({'newAthlete':'ok'});
+            }    
+        })
     }).catch(err=>{
         console.log("nisam dodao");
         res.status(400).json({'newAthlete':'no'});
@@ -188,7 +197,7 @@ router.route('/getAllAthletes').get((req, res)=>{
 });
 
 // Get all athletes by name
-router.route('/getAthleteByName').get((req, res)=>{
+router.route('/getAthleteByName').post((req, res)=>{
     let name = req.body.name;
 
     athlete.find({"name": name}, (err, athletes)=>{
@@ -198,7 +207,7 @@ router.route('/getAthleteByName').get((req, res)=>{
 });
 
 // Get all athletes by surname
-router.route('/getAthleteBySurname').get((req, res)=>{
+router.route('/getAthleteBySurname').post((req, res)=>{
     let surname = req.body.surname;
 
     athlete.find({"surname": surname}, (err, athletes)=>{
@@ -208,7 +217,7 @@ router.route('/getAthleteBySurname').get((req, res)=>{
 });
 
 // Get all athletes by name and surname
-router.route('/getAthleteByNameSurname').get((req, res)=>{
+router.route('/getAthleteByNameSurname').post((req, res)=>{
     let name = req.body.name;
     let surname = req.body.surname;
 
@@ -219,46 +228,142 @@ router.route('/getAthleteByNameSurname').get((req, res)=>{
 });
 
 // Get all athletes by sport
-router.route('/getAthleteBySport').get((req, res)=>{
+router.route('/getAthleteBySport').post((req, res)=>{
     let sport = req.body.sport;
 
-    athlete.find({"sport": sport }, (err, athletes)=>{
+    athlete.find({"disciplines": sport }, (err, athletes)=>{
         if(err) console.log(err);
         else res.json(athletes);
     })
 });
 
 // Get all athletes by name and sport
-router.route('/getAthleteByNameSport').get((req, res)=>{
+router.route('/getAthleteByNameSport').post((req, res)=>{
     let name = req.body.name;
     let sport = req.body.sport;
 
-    athlete.find({"name": name, "sport": sport }, (err, athletes)=>{
+    athlete.find({"name": name, "disciplines": sport }, (err, athletes)=>{
         if(err) console.log(err);
         else res.json(athletes);
     })
 });
 
 // Get all athletes by surname and sport
-router.route('/getAthleteBySurnameSport').get((req, res)=>{
+router.route('/getAthleteBySurnameSport').post((req, res)=>{
     let surname = req.body.surname;
     let sport = req.body.sport;
 
-    athlete.find({"surname": surname, "sport": sport }, (err, athletes)=>{
+    athlete.find({"surname": surname, "disciplines": sport }, (err, athletes)=>{
         if(err) console.log(err);
         else res.json(athletes);
     })
 });
 
 // Get all athletes by all
-router.route('/getAthleteByNameSurnameSport').get((req, res)=>{
+router.route('/getAthleteByNameSurnameSport').post((req, res)=>{
     let name = req.body.name;
     let surname = req.body.surname;
     let sport = req.body.sport;
 
-    athlete.find({"name": name, "surname": surname, "sport": sport }, (err, athletes)=>{
+    athlete.find({"name": name, "surname": surname, "disciplines": sport }, (err, athletes)=>{
         if(err) console.log(err);
         else res.json(athletes);
+    })
+});
+
+// Get all delegates
+router.route('/getAllDelegates').get((req, res)=>{
+    user.find({"userType": "competitionDelegate"}, (err, delegates)=>{
+        if(err) console.log(err);
+        else res.json(delegates);
+    })
+});
+
+// Get individual sport
+router.route('/getIndividualSport').get((req, res)=>{
+    sport.find({"type": "individual"}, (err, delegates)=>{
+        if(err) console.log(err);
+        else res.json(delegates);
+    })
+});
+
+// Get all athletes sport and gender
+router.route('/getAthleteBySportGender').post((req, res)=>{
+    let gender = req.body.gender;
+    let sport = req.body.sport;
+
+    athlete.find({"disciplines": sport, "gender": gender }, (err, athletes)=>{
+        if(err) console.log(err);
+        else res.json(athletes);
+    })
+});
+
+// Get tennis
+router.route('/getTennis').get((req, res)=>{
+    sport.find({"discipline": "Singles"}, (err, sports)=>{
+        if(err) console.log(err);
+        else res.json(sports);
+    })
+});
+
+// Check delegate
+router.route('/checkDelegate').post((req, res)=>{
+    let username = req.body.username;
+
+    competition.find({"delegate": username}, (err, comp)=>{
+        if(err) console.log(err);
+        else res.json(comp);
+    })
+});
+
+// Get competition
+router.route('/getCompetition').post((req, res)=>{
+    let name = req.body.name;
+
+    competition.findOne({"competition": name}, (err, comp)=>{
+        if(err) console.log(err);
+        else res.json(comp);
+    })
+});
+
+// Add discipline in athlete
+router.route('/updateCompetition').post((req, res)=>{
+    let name = req.body.name;
+    let location = req.body.location;
+    let date = new Date(req.body.date);
+
+    console.log(name);
+
+    competition.findOne({"competition": name}, (err, a)=>{
+        if(err) console.log(err);
+        else {
+            if(a){
+                console.log("tu");
+                console.log(date.toString());
+                competition.updateOne({competition: name}, { $set: {location: location, date: date} }, (e, aa) => {
+                    if (e) {
+                        console.log(e);
+                        res.status(400).json({'updatedComp':'no'});
+                    }
+                    else {
+                        res.status(200).json({'updatedComp':'ok'});
+                    }
+                })
+            }else{
+                res.status(200).json({'updatedComp':'no'});
+            }
+        }
+    })
+});
+
+// Competition start
+router.route('/competitionStart').post((req, res)=>{
+    let sport = req.body.sport;
+    let discipline = req.body.discipline;
+
+    competition.findOne({"sport":sport, "discipline":discipline}, (err, comp)=>{
+        if(err) console.log(err);
+        else res.json(comp);
     })
 });
 

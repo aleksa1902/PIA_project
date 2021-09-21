@@ -107,6 +107,7 @@ router.route('/getAllSports').get((req, res) => {
 // OVO PREUREDITI
 router.route('/addCompetition').post((req, res) => {
     let newCompetition = new competition_1.default(req.body);
+    console.log(newCompetition);
     newCompetition.save().then(e => {
         res.status(200).json({ 'newCompetition': 'ok' });
     }).catch(err => {
@@ -152,7 +153,6 @@ router.route('/addDiscipline').post((req, res) => {
 });
 // Add new athlete
 router.route('/addAthlete').post((req, res) => {
-    //let newAthlete = new athlete(req.body);
     let new_athlete = new athlete_1.default({
         name: req.body.name,
         surname: req.body.surname,
@@ -160,10 +160,19 @@ router.route('/addAthlete').post((req, res) => {
         country: req.body.country,
         disciplines: [req.body.disciplines]
     });
-    console.log(new_athlete);
+    let coun = req.body.country;
+    //console.log(new_athlete);
     new_athlete.save().then(e => {
         console.log("dodao sam");
-        res.status(200).json({ 'newAthlete': 'ok' });
+        country_1.default.updateOne({ name: coun }, { $inc: { 'numberOfAthletes': 1 } }, (e, r) => {
+            console.log(r);
+            if (e) {
+                res.status(400).json({ 'newAthlete': 'no' });
+            }
+            else {
+                res.status(200).json({ 'newAthlete': 'ok' });
+            }
+        });
     }).catch(err => {
         console.log("nisam dodao");
         res.status(400).json({ 'newAthlete': 'no' });
@@ -176,6 +185,179 @@ router.route('/getAllAthletes').get((req, res) => {
             console.log(err);
         else
             res.json(athletes);
+    });
+});
+// Get all athletes by name
+router.route('/getAthleteByName').post((req, res) => {
+    let name = req.body.name;
+    athlete_1.default.find({ "name": name }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all athletes by surname
+router.route('/getAthleteBySurname').post((req, res) => {
+    let surname = req.body.surname;
+    athlete_1.default.find({ "surname": surname }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all athletes by name and surname
+router.route('/getAthleteByNameSurname').post((req, res) => {
+    let name = req.body.name;
+    let surname = req.body.surname;
+    athlete_1.default.find({ "name": name, "surname": surname }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all athletes by sport
+router.route('/getAthleteBySport').post((req, res) => {
+    let sport = req.body.sport;
+    athlete_1.default.find({ "disciplines": sport }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all athletes by name and sport
+router.route('/getAthleteByNameSport').post((req, res) => {
+    let name = req.body.name;
+    let sport = req.body.sport;
+    athlete_1.default.find({ "name": name, "disciplines": sport }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all athletes by surname and sport
+router.route('/getAthleteBySurnameSport').post((req, res) => {
+    let surname = req.body.surname;
+    let sport = req.body.sport;
+    athlete_1.default.find({ "surname": surname, "disciplines": sport }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all athletes by all
+router.route('/getAthleteByNameSurnameSport').post((req, res) => {
+    let name = req.body.name;
+    let surname = req.body.surname;
+    let sport = req.body.sport;
+    athlete_1.default.find({ "name": name, "surname": surname, "disciplines": sport }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get all delegates
+router.route('/getAllDelegates').get((req, res) => {
+    user_1.default.find({ "userType": "competitionDelegate" }, (err, delegates) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(delegates);
+    });
+});
+// Get individual sport
+router.route('/getIndividualSport').get((req, res) => {
+    sport_1.default.find({ "type": "individual" }, (err, delegates) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(delegates);
+    });
+});
+// Get all athletes sport and gender
+router.route('/getAthleteBySportGender').post((req, res) => {
+    let gender = req.body.gender;
+    let sport = req.body.sport;
+    athlete_1.default.find({ "disciplines": sport, "gender": gender }, (err, athletes) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(athletes);
+    });
+});
+// Get tennis
+router.route('/getTennis').get((req, res) => {
+    sport_1.default.find({ "discipline": "Singles" }, (err, sports) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(sports);
+    });
+});
+// Check delegate
+router.route('/checkDelegate').post((req, res) => {
+    let username = req.body.username;
+    competition_1.default.find({ "delegate": username }, (err, comp) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(comp);
+    });
+});
+// Get competition
+router.route('/getCompetition').post((req, res) => {
+    let name = req.body.name;
+    competition_1.default.findOne({ "competition": name }, (err, comp) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(comp);
+    });
+});
+// Add discipline in athlete
+router.route('/updateCompetition').post((req, res) => {
+    let name = req.body.name;
+    let location = req.body.location;
+    let date = new Date(req.body.date);
+    console.log(name);
+    competition_1.default.findOne({ "competition": name }, (err, a) => {
+        if (err)
+            console.log(err);
+        else {
+            if (a) {
+                console.log("tu");
+                console.log(date.toString());
+                competition_1.default.updateOne({ competition: name }, { $set: { location: location, date: date } }, (e, aa) => {
+                    if (e) {
+                        console.log(e);
+                        res.status(400).json({ 'updatedComp': 'no' });
+                    }
+                    else {
+                        res.status(200).json({ 'updatedComp': 'ok' });
+                    }
+                });
+            }
+            else {
+                res.status(200).json({ 'updatedComp': 'no' });
+            }
+        }
+    });
+});
+// Competition start
+router.route('/competitionStart').post((req, res) => {
+    let sport = req.body.sport;
+    let discipline = req.body.discipline;
+    competition_1.default.findOne({ "sport": sport, "discipline": discipline }, (err, comp) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(comp);
     });
 });
 app.use('/', router);

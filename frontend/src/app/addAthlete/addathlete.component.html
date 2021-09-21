@@ -27,7 +27,7 @@
             <td>Discipline:</td>
             <td>
                 <select name="discipline" [(ngModel)]="discipline">
-                    <option *ngFor="let s of sports" value="{{s.discipline}}">
+                    <option *ngFor="let s of sports" value="{{s.sport}},{{s.discipline}}">
                         {{s.sport}} - {{s.discipline}}
                      </option>
                 </select>

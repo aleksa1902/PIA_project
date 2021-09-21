@@ -48,5 +48,17 @@ export class UserService {
     return this.http.post(`${this.uri}/changePassword`, data);
   }
 
+  getAllDelegates(){
+    return this.http.get(`${this.uri}/getAllDelegates`);
+  }
+
+  checkDelegate(delegate){
+    const data={
+      username: delegate
+    }
+
+    return this.http.post(`${this.uri}/checkDelegate`, data);
+  }
+
 
 }

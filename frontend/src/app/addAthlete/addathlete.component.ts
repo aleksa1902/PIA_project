@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Athlete } from '../model/athlete.model';
+import { Competition } from '../model/competition.models';
 import { Country } from '../model/country.model';
 import { Sport } from '../model/sport.model';
 import { User } from '../model/user.model';
@@ -36,37 +37,56 @@ export class AddAthleteComponent implements OnInit {
   message: string;
 
   addAthlete(){
+    let sportName = this.discipline.split(",")[0];
+    let discipline = this.discipline.split(",")[1];
+
     if(this.name != undefined && this.surname != undefined && this.discipline != undefined && this.gender != undefined){
-        this.serviceAthlete.findAthlete(this.name, this.surname).subscribe((a : Athlete)=>{
-            if(a){
-                let disc = false;
-            
-                for(let i = 0; i < a.disciplines.length; i++){
-                    if(a.disciplines[i] == this.discipline){
-                        disc = true;
-                        break;
-                    }
+      this.serviceAthlete.findAthlete(this.name, this.surname).subscribe((a : Athlete)=>{
+        if(a){
+            let disc = false;
+        
+            for(let i = 0; i < a.disciplines.length; i++){
+                if(a.disciplines[i] == this.discipline){
+                    disc = true;
+                    break;
                 }
-                if(!disc){
-                    this.serviceAthlete.addDiscipline(this.name, this.surname, this.discipline).subscribe(e=>{
-                      if(e['addDiscipline']=='ok'){
-                        this.ruter.navigate(['headOfTheNationalDelegation']);
-                      }else{
-                        this.message = "Error #1";
-                      }     
-                    })
-                } 
-            }else{
-              //console.log("OVDE SAM");
-              //console.log(this.name + " " + this.surname + " " + this.gender + " " + this.user.country + " " + this.discipline);
-                this.serviceAthlete.addAthlete(this.name, this.surname, this.user.country, this.gender, this.discipline).subscribe(e=>{
-                  if(e['newAthlete']=='ok'){
-                    this.ruter.navigate(['headOfTheNationalDelegation']);
-                  }else{
-                    this.message = "Error #2";
-                  }
-                })
             }
+
+            this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
+              if(c){
+                this.message = "Competition has started";
+              }else{
+                if(!disc){
+                  this.serviceAthlete.addDiscipline(this.name, this.surname, discipline).subscribe(e=>{
+                    if(e['addDiscipline']=='ok'){
+                      this.ruter.navigate(['headOfTheNationalDelegation']);
+                    }else{
+                      this.message = "Error #1";
+                    }     
+                  })
+                } 
+              }
+            })
+
+              
+        }else{
+          //console.log("OVDE SAM");
+          //console.log(this.name + " " + this.surname + " " + this.gender + " " + this.user.country + " " + this.discipline);
+          this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
+            if(c){
+              this.message = "Competition has started";
+            }else{
+              this.serviceAthlete.addAthlete(this.name, this.surname, this.user.country, this.gender, discipline).subscribe(e=>{
+                if(e['newAthlete']=='ok'){
+                  this.ruter.navigate(['headOfTheNationalDelegation']);
+                }else{
+                  this.message = "Error #2";
+                }
+              })
+            }
+          })
+          
+        }
         })
     }else{
       this.message = "Something wrong";

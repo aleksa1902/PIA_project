@@ -1,2 +1,49 @@
 <h1>Welcome ! {{user.name}} {{user.surname}}</h1>
 <input type='button' value='LogOut' (click)='logout()'>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Rang Column -->
+      <ng-container matColumnDef="competition">
+        <th mat-header-cell *matHeaderCellDef> Competition </th>
+        <td mat-cell *matCellDef="let element;"> {{element.competition}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="discipline">
+        <th mat-header-cell *matHeaderCellDef> Discipline </th>
+        <td mat-cell *matCellDef="let element"> {{element.discipline}} </td>
+      </ng-container>
+  
+      <!-- Number of athlets Column -->
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef> Location </th>
+        <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+      </ng-container>
+
+      <!-- Number of athlets Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+      </ng-container>
+
+      <!-- Number of athlets Column -->
+      <ng-container matColumnDef="setDate">
+        <th mat-header-cell *matHeaderCellDef> Set date </th>
+        <td mat-cell *matCellDef="let element"> <input *ngIf="!element.date;" type='button' value='Set date' (click)='setDate(element.competition)'> </td>
+      </ng-container>
+
+      <!-- Number of athlets Column -->
+      <ng-container matColumnDef="setResult">
+        <th mat-header-cell *matHeaderCellDef> Set result </th>
+        <td mat-cell *matCellDef="let element"> <input *ngIf="element.date;" type='button' value='Set result' (click)='setResult(element.name)'> </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  
+  

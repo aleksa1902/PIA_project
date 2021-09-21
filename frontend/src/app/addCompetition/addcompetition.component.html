@@ -9,17 +9,50 @@
             </td>
         </tr>
         <tr>
-            <td>Format:</td>
+            <td>Gender:</td>
             <td>
-                <input type='text' name='format' [(ngModel)]='format'>
+                <select name="Gender" [(ngModel)]="gender" (change)="getAthletes()">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
             </td>
         </tr>
         <tr>
-            <td>Sport:</td>
+            <td>Format:</td>
             <td>
-                <select name="sports" [(ngModel)]="sport">
-                    <option *ngFor="let s of sports" value="{{s.sport}}">
-                        {{s.sport}}
+                <select name="format" [(ngModel)]="format" (change)="changeSport()">
+                    <option *ngFor="let f of formats" value="{{f}}">
+                        {{f}}
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Sport and discipline:</td>
+            <td>
+                <select name="sports" [(ngModel)]="sport" (change)="getAthletes()">
+                    <option *ngFor="let s of sports" value="{{s.sport}},{{s.discipline}}">
+                        {{s.sport}} - {{s.discipline}}
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Delegate:</td>
+            <td>
+                <select name="delegate" [(ngModel)]="delegate">
+                    <option *ngFor="let d of delegates" value="{{d.username}}">
+                        {{d.name}} - {{d.surname}}
+                     </option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Athlete:</td>
+            <td>
+                <select name="athlete" [(ngModel)]="athlete" (change)="added()" multiple>
+                    <option *ngFor="let a of athletes" value="{{a.name}},{{a.surname}}">
+                        {{a.name}} {{a.surname}} - {{a.country}}
                      </option>
                 </select>
             </td>
