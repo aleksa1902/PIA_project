@@ -27,6 +27,9 @@ let Competition = new Schema({
     delegate:{
         type: String
     },
+    finished:{
+        type: Boolean
+    },
     athletes: [{
         type: String
     }]

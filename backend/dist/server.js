@@ -360,6 +360,52 @@ router.route('/competitionStart').post((req, res) => {
             res.json(comp);
     });
 });
+// Add discipline in athlete
+router.route('/updateResults').post((req, res) => {
+    let name = req.body.name;
+    let goldC = req.body.gc;
+    let silverC = req.body.sc;
+    let bronzeC = req.body.bc;
+    console.log(goldC);
+    country_1.default.updateOne({ name: goldC }, { $inc: { 'goldMedals': 1 } }, (e, a) => {
+        if (e) {
+            console.log(e);
+            res.status(200).json({ 'gold': 'no' });
+        }
+        else {
+            res.status(200).json({ 'gold': 'ok' });
+        }
+    });
+    console.log(silverC);
+    country_1.default.updateOne({ name: silverC }, { $inc: { 'silverMedals': 1 } }, (e, a) => {
+        if (e) {
+            console.log(e);
+            res.status(200).json({ 'silver': 'no' });
+        }
+        else {
+            res.status(200).json({ 'silver': 'ok' });
+        }
+    });
+    console.log(bronzeC);
+    country_1.default.updateOne({ name: bronzeC }, { $inc: { 'bronzeMedals': 1 } }, (e, a) => {
+        if (e) {
+            console.log(e);
+            res.status(200).json({ 'bronze': 'no' });
+        }
+        else {
+            res.status(200).json({ 'bronze': 'ok' });
+        }
+    });
+    competition_1.default.updateOne({ name: name }, { $set: { 'finished': true } }, (e, a) => {
+        if (e) {
+            console.log(e);
+            res.status(200).json({ 'gg': 'no' });
+        }
+        else {
+            res.status(200).json({ 'gg': 'ok' });
+        }
+    });
+});
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

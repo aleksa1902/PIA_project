@@ -1,0 +1,27 @@
+<h1>Welcome ! {{user.name}} {{user.surname}}</h1>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="competition.athletes">
+  
+      <!-- Rang Column -->
+      <ng-container matColumnDef="athlete">
+        <th mat-header-cell *matHeaderCellDef> Athlete </th>
+        <td mat-cell *matCellDef="let athlete;"> {{athlete}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="result">
+        <th mat-header-cell *matHeaderCellDef> Result {{format}} </th>
+        <td mat-cell *matCellDef="let athlete"> <input type='text' name='result' [(ngModel)]='results[competition.athletes.indexOf(athlete)]'> </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <input type='button' value='Set result' (click)='setResult()'>
+
+  </div>
+
+  
+  

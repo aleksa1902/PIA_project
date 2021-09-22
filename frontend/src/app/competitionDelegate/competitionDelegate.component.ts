@@ -42,4 +42,10 @@ export class CompetitionDelegateComponent implements OnInit {
     this.ruter.navigate(['dateCompetition']);
   }
 
+  setResult(name){
+    localStorage.setItem('setResult', JSON.stringify(name));
+    console.log(name);
+    this.ruter.navigate(['competitionResult']);
+  }
+
 }

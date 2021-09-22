@@ -57,51 +57,57 @@ export class AddCompetitionComponent implements OnInit {
           let sportName = this.sport.split(",")[0];
           let sportDiscipline = this.sport.split(",")[1];
           if(u.length < 3){
-            if(this.format == "final 8" && this.sport != "Singles"){
-              if(this.athlete.length > 0 && this.athlete.length <= 8){
-                this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, this.athlete).subscribe(ob=>{
-                  if(ob['newCompetition']=='ok'){
-                    console.log('Sport added');
-                    this.ruter.navigate(['organizer']);
-                  }else{
-                    console.log("greska");
-                  }
-                })
+            this.serviceAthlete.competitionStart(sportName, sportDiscipline).subscribe((c:Competition)=>{
+              if(c){
+                this.message = "competition exists";
               }else{
-                this.message = "Not enough athlete.";
+                if(this.format == "final 8" && this.sport != "Singles"){
+                  if(this.athlete.length > 0 && this.athlete.length <= 8){
+                    this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, false, this.athlete).subscribe(ob=>{
+                      if(ob['newCompetition']=='ok'){
+                        console.log('Sport added');
+                        this.ruter.navigate(['organizer']);
+                      }else{
+                        console.log("greska");
+                      }
+                    })
+                  }else{
+                    this.message = "Not enough athlete.";
+                  }
+                }else if(this.format != "final 8" && this.sport == "Singles"){
+                  if(this.format == "tennis 4" && this.athlete.length == 4){
+                    this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, false, this.athlete).subscribe(ob=>{
+                      if(ob['newCompetition']=='ok'){
+                        console.log('Sport added');
+                        this.ruter.navigate(['organizer']);
+                      }else{
+                        console.log("greska");
+                      }
+                    })
+                  }else if(this.format == "tennis 8" && this.athlete.length == 8){
+                    this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, false, this.athlete).subscribe(ob=>{
+                      if(ob['newCompetition']=='ok'){
+                        console.log('Sport added');
+                        this.ruter.navigate(['organizer']);
+                      }else{
+                        console.log("greska");
+                      }
+                    })
+                  }else if(this.format == "tennis 16" && this.athlete.length == 16){
+                    this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, false, this.athlete).subscribe(ob=>{
+                      if(ob['newCompetition']=='ok'){
+                        console.log('Sport added');
+                        this.ruter.navigate(['organizer']);
+                      }else{
+                        console.log("greska");
+                      }
+                    })
+                  }else{
+                    this.message = "Noth enough for tennis.";
+                  }
+                }
               }
-            }else if(this.format != "final 8" && this.sport == "Singles"){
-              if(this.format == "tennis 4" && this.athlete.length == 4){
-                this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, this.athlete).subscribe(ob=>{
-                  if(ob['newCompetition']=='ok'){
-                    console.log('Sport added');
-                    this.ruter.navigate(['organizer']);
-                  }else{
-                    console.log("greska");
-                  }
-                })
-              }else if(this.format == "tennis 8" && this.athlete.length == 8){
-                this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, this.athlete).subscribe(ob=>{
-                  if(ob['newCompetition']=='ok'){
-                    console.log('Sport added');
-                    this.ruter.navigate(['organizer']);
-                  }else{
-                    console.log("greska");
-                  }
-                })
-              }else if(this.format == "tennis 16" && this.athlete.length == 16){
-                this.serviceCompetition.addCompetition(this.competition, this.gender, this.format, sportName, sportDiscipline, this.delegate, this.athlete).subscribe(ob=>{
-                  if(ob['newCompetition']=='ok'){
-                    console.log('Sport added');
-                    this.ruter.navigate(['organizer']);
-                  }else{
-                    console.log("greska");
-                  }
-                })
-              }else{
-                this.message = "Noth enough for tennis.";
-              }
-            }
+            })
           }else{
             this.message = "Error delegate.";
           }
@@ -116,6 +122,7 @@ export class AddCompetitionComponent implements OnInit {
     this.serviceAthlete.getAthleteBySportGender(discipline, this.gender).subscribe((a: Athlete[])=>{
       this.athletes = a;
     })
+    this.athlete = null;
   }
 
   added(){

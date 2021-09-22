@@ -18,8 +18,8 @@
             <td>Sport:</td>
             <td>
                 <select name="sport" [(ngModel)]="sport">
-                    <option *ngFor="let s of sports" value="{{s.sport}}">
-                        {{s.sport}}
+                    <option *ngFor="let s of sports" value="{{s.discipline}}">
+                        {{s.sport}}-{{s.discipline}}
                      </option>
                 </select>
             </td>

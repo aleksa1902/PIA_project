@@ -10,7 +10,7 @@ export class CompetitionService {
 
   constructor(private http: HttpClient) { }
 
-  addCompetition(competition, gender, format, sportName, sportDiscipline, delegate, athlete){
+  addCompetition(competition, gender, format, sportName, sportDiscipline, delegate, finished, athlete){
     const data={
       competition: competition,
       sport: sportName,
@@ -20,6 +20,7 @@ export class CompetitionService {
       location: null,
       time: null,
       delegate: delegate,
+      finished: finished,
       athletes: athlete
     }
 
@@ -44,6 +45,16 @@ export class CompetitionService {
       date: date
     }
     return this.http.post(`${this.uri}/updateCompetition`, data); 
+  }
+
+  updateResults(name, gc, sc, bc){
+    const data={
+      name: name,
+      gc: gc,
+      sc: sc,
+      bc: bc
+    }
+    return this.http.post(`${this.uri}/updateResults`, data); 
   }
 
 }

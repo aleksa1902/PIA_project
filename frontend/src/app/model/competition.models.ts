@@ -7,5 +7,6 @@ export class Competition{
     location: string;
     date: Date;
     delegate: string;
+    finished: boolean;
     athletes: string[];
 }

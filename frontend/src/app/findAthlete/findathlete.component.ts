@@ -23,24 +23,13 @@ export class FindAthleteComponent implements OnInit {
   constructor(private serviceCountry: CountryService, private serviceSport: SportService, private serviceAthlete: AthleteService, private ruter: Router) { }
 
   ngOnInit(): void {
-    this.serviceSport.getAllSports().subscribe((sports: Sport[])=>{
-        this.sports = sports;
-        //this.sports.forEach((s: Sport)=>{
-        //  let test = false;
-        //  if(test){
-        //    if(!this.nameSport.includes(s.sport)){
-        //      this.nameSport.push(s.sport);
-        //    }
-        //  }else{
-        //    this.nameSport.push(s.sport);
-        //  }
-        //})
+    this.serviceSport.getAllSports().subscribe((sport: Sport[])=>{
+        this.sports = sport;
     });
     this.serviceCountry.getAllCountries().subscribe((countries: Country[])=>{
         this.countries = countries;
     })
   }
-
   sports: Sport[];
   countries: Country[];
   message: string;

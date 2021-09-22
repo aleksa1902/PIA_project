@@ -22,6 +22,7 @@ import { AddAthleteJSONComponent } from './addAthleteJson/addathletejson.compone
 import { FindAthleteComponent } from './findAthlete/findathlete.component';
 import { AddCompetitionComponent } from './addCompetition/addCompetition.component';
 import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
+import { CompetitionResultComponent } from './competitionResult/competitionresult.component';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DateCompetitionComponent } from './dateCompetition/datecompetition.comp
     AddAthleteJSONComponent,
     FindAthleteComponent,
     AddCompetitionComponent,
-    DateCompetitionComponent
+    DateCompetitionComponent,
+    CompetitionResultComponent
   ],
   imports: [
     BrowserModule,

@@ -21,8 +21,14 @@ import {MatTableDataSource} from '@angular/material/table';
     ngOnInit(): void {
         this.serviceCountry.getAllCountries().subscribe((countries: Country[])=>{
             this.countries = countries;
-            console.log(this.countries);
-            this.dataSource = new MatTableDataSource<Country>(countries);
+            
+            this.countries.sort((first, second)=>{
+              let f = first.goldMedals + first.silverMedals + first.bronzeMedals;
+              let s = second.goldMedals + second.silverMedals + second.bronzeMedals;
+              return s - f;
+            })
+
+            this.dataSource = new MatTableDataSource<Country>(this.countries);
             this.dataSource.paginator = this.paginator;
             console.log(this.dataSource);
           });
