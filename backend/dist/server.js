@@ -385,25 +385,19 @@ router.route('/updateResults').post((req, res) => {
                             res.status(400).json({ 'medal': 'no' });
                         }
                         else {
-                            res.status(200).json({ 'medal': 'ok' });
+                            competition_1.default.updateOne({ competition: name }, { $set: { 'finished': true } }, (e, aa) => {
+                                if (e) {
+                                    console.log(e);
+                                    res.status(400).json({ 'medal': 'no' });
+                                }
+                                else {
+                                    res.status(200).json({ 'medal': 'ok' });
+                                }
+                            });
                         }
                     });
                 }
             });
-        }
-    });
-});
-// Update competition
-router.route('/competitionFinished').post((req, res) => {
-    let name = req.body.name;
-    competition_1.default.updateOne({ competition: name }, { $set: { 'finished': true } }, (e, aa) => {
-        if (e) {
-            console.log(e);
-            res.status(400).json({ 'gg': 'no' });
-        }
-        else {
-            console.log('jedi govna');
-            res.status(200).json({ 'gg': 'ok' });
         }
     });
 });

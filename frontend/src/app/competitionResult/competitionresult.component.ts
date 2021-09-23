@@ -176,8 +176,9 @@ export class CompetitionResultComponent implements OnInit {
                 this.bronzeAthlete = a;
 
                 this.serviceCompetition.updateResults(this.competition.competition, this.goldAthlete[0].country, this.silverAthlete[0].country, this.bronzeAthlete[0].country).subscribe(e=>{
-                  if(e['gold']=='ok' && e['silver']=='ok' && e['bronze']=='ok'){
+                  if(e['medal']=='ok'){
                     console.log("KUL");
+                    this.ruter.navigate(['competitionDelegate']);
                   }else{
                     console.log("NOT KUL");
                   }
