@@ -325,7 +325,7 @@ router.route('/updateCompetition').post((req, res) => {
     let name = req.body.name;
     let location = req.body.location;
     let date = new Date(req.body.date);
-    console.log(name);
+    console.log("ovo sam dobio od fronta i kreirao sam new Date " + date);
     competition_1.default.findOne({ "competition": name }, (err, a) => {
         if (err)
             console.log(err);
@@ -366,42 +366,43 @@ router.route('/updateResults').post((req, res) => {
     let goldC = req.body.gc;
     let silverC = req.body.sc;
     let bronzeC = req.body.bc;
-    console.log(goldC);
     country_1.default.updateOne({ name: goldC }, { $inc: { 'goldMedals': 1 } }, (e, a) => {
         if (e) {
             console.log(e);
-            res.status(200).json({ 'gold': 'no' });
+            res.status(400).json({ 'medal': 'no' });
         }
         else {
-            res.status(200).json({ 'gold': 'ok' });
+            country_1.default.updateOne({ name: silverC }, { $inc: { 'silverMedals': 1 } }, (e, a) => {
+                if (e) {
+                    console.log(e);
+                    res.status(400).json({ 'medal': 'no' });
+                }
+                else {
+                    console.log(bronzeC);
+                    country_1.default.updateOne({ name: bronzeC }, { $inc: { 'bronzeMedals': 1 } }, (e, a) => {
+                        if (e) {
+                            console.log(e);
+                            res.status(400).json({ 'medal': 'no' });
+                        }
+                        else {
+                            res.status(200).json({ 'medal': 'ok' });
+                        }
+                    });
+                }
+            });
         }
     });
-    console.log(silverC);
-    country_1.default.updateOne({ name: silverC }, { $inc: { 'silverMedals': 1 } }, (e, a) => {
+});
+// Update competition
+router.route('/competitionFinished').post((req, res) => {
+    let name = req.body.name;
+    competition_1.default.updateOne({ competition: name }, { $set: { 'finished': true } }, (e, aa) => {
         if (e) {
             console.log(e);
-            res.status(200).json({ 'silver': 'no' });
+            res.status(400).json({ 'gg': 'no' });
         }
         else {
-            res.status(200).json({ 'silver': 'ok' });
-        }
-    });
-    console.log(bronzeC);
-    country_1.default.updateOne({ name: bronzeC }, { $inc: { 'bronzeMedals': 1 } }, (e, a) => {
-        if (e) {
-            console.log(e);
-            res.status(200).json({ 'bronze': 'no' });
-        }
-        else {
-            res.status(200).json({ 'bronze': 'ok' });
-        }
-    });
-    competition_1.default.updateOne({ name: name }, { $set: { 'finished': true } }, (e, a) => {
-        if (e) {
-            console.log(e);
-            res.status(200).json({ 'gg': 'no' });
-        }
-        else {
+            console.log('jedi govna');
             res.status(200).json({ 'gg': 'ok' });
         }
     });

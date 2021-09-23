@@ -39,20 +39,6 @@ import { UserService } from '../services/user.service';
       })
     }
 
-    routerRegister(){
-      this.ruter.navigate(['register']);
-    }
-
-    changePassword(){
-      this.ruter.navigate(['changePassword']);
-    }
-
-    listCountries(){
-      this.ruter.navigate(['listCountries']);
-    }
-
-    listMedals(){
-      this.ruter.navigate(['listMedals']);
-    }
+    
   
   }

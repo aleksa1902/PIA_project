@@ -21,7 +21,7 @@ export class CompetitionResultComponent implements OnInit {
     if(this.user.userType != "competitionDelegate"){
       this.ruter.navigate(['login']);
     }
-    let name = JSON.parse(localStorage.getItem('setDate'));
+    let name = JSON.parse(localStorage.getItem('setResult'));
     console.log(name);
 
     if(name){

@@ -20,20 +20,6 @@ export class HeadOfTheNationalDelegationComponent implements OnInit {
 
   user: User;
 
-  logout(){
-    //this.user = null;
-    localStorage.removeItem('registered');
-    console.log(localStorage.getItem('registered'));
-
-    this.ruter.navigate(['']);
-  }
-
-  addAthlete(){
-    this.ruter.navigate(['addAthlete']);
-  }
-
-  addAthleteJSON(){
-    this.ruter.navigate(['addAthleteJSON']);
-  }
+  
 
 }

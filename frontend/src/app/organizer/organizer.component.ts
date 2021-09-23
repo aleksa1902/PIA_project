@@ -20,24 +20,4 @@ export class OrganizerComponent implements OnInit {
 
   user: User;
 
-  logout(){
-    this.user = null;
-    localStorage.removeItem('registered');
-    console.log(localStorage.getItem('registered'));
-
-    this.ruter.navigate(['']);
-  }
-
-  addSport(){
-    this.ruter.navigate(['addSport']);
-  }
-
-  findAthlete(){
-    this.ruter.navigate(['findAthlete']);
-  }
-
-  addCompetition(){
-    this.ruter.navigate(['addCompetition']);
-  }
-
 }
