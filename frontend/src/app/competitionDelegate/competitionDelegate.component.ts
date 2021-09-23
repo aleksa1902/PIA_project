@@ -12,7 +12,7 @@ import { UserService } from '../services/user.service';
 })
 export class CompetitionDelegateComponent implements OnInit {
   displayedColumns: string[] = ['competition', 'discipline', 'location', 'date', 'setDate', 'setResult'];
-  constructor(private serviceUser: UserService, private ruter: Router) { }
+  constructor(private serivceCompetition: CompetitionService, private serviceUser: UserService, private ruter: Router) { }
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('registered'))
@@ -45,7 +45,14 @@ export class CompetitionDelegateComponent implements OnInit {
   setResult(name){
     localStorage.setItem('setResult', JSON.stringify(name));
     console.log(name);
-    this.ruter.navigate(['competitionResult']);
+    
+    this.serivceCompetition.getCompetition(name).subscribe((c: Competition)=>{
+      if(c.sport == 'tennis'){
+        this.ruter.navigate(['competitionResultTennis']);
+      }else{
+        this.ruter.navigate(['competitionResult']);
+      }
+    })
   }
 
 }

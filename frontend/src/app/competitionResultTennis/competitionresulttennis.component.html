@@ -1,0 +1,27 @@
+<h1>Welcome ! {{user.name}} {{user.surname}}</h1>
+
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+  
+      <!-- Rang Column -->
+      <ng-container matColumnDef="match">
+        <th mat-header-cell *matHeaderCellDef> Match </th>
+        <td mat-cell *matCellDef="let a;"> {{a}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="result">
+        <th mat-header-cell *matHeaderCellDef> Result (sets1:sets2) </th>
+        <td mat-cell *matCellDef="let a"> <input type='text' name='result' [(ngModel)]='results[test.indexOf(a)]'> </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <input type='button' value='Set result' (click)='setResult()'>
+
+  </div>
+
+  
+  

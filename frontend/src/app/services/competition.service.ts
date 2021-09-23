@@ -57,4 +57,13 @@ export class CompetitionService {
     return this.http.post(`${this.uri}/updateResults`, data); 
   }
 
+  updateTennisResult(name, athletes, format){
+    const data={
+      name: name,
+      athletes: athletes,
+      format: format
+    }
+    return this.http.post(`${this.uri}/updateTennisResult`, data); 
+  }
+
 }

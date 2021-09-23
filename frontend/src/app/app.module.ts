@@ -23,6 +23,7 @@ import { FindAthleteComponent } from './findAthlete/findathlete.component';
 import { AddCompetitionComponent } from './addCompetition/addCompetition.component';
 import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
 import { CompetitionResultComponent } from './competitionResult/competitionresult.component';
+import { CompetitionResultTennisComponent } from './competitionResultTennis/competitionresulttennis.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { CompetitionResultComponent } from './competitionResult/competitionresul
     FindAthleteComponent,
     AddCompetitionComponent,
     DateCompetitionComponent,
-    CompetitionResultComponent
+    CompetitionResultComponent,
+    CompetitionResultTennisComponent
   ],
   imports: [
     BrowserModule,

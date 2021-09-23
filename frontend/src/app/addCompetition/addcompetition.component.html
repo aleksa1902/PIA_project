@@ -20,7 +20,7 @@
         <tr>
             <td>Format:</td>
             <td>
-                <select name="format" [(ngModel)]="format" (change)="changeSport()">
+                <select name="format" [(ngModel)]="format">
                     <option *ngFor="let f of formats" value="{{f}}">
                         {{f}}
                      </option>

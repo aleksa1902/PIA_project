@@ -7,6 +7,7 @@ import { AddSportComponent } from './addSport/addsport.component';
 import { ChangePasswordComponent } from './changePassword/changepassword.component';
 import { CompetitionDelegateComponent } from './competitionDelegate/competitionDelegate.component';
 import { CompetitionResultComponent } from './competitionResult/competitionresult.component';
+import { CompetitionResultTennisComponent } from './competitionResultTennis/competitionresulttennis.component';
 import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
 import { FindAthleteComponent } from './findAthlete/findathlete.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
@@ -33,6 +34,7 @@ const routes: Routes = [
   {path: "addCompetition", component: AddCompetitionComponent},
   {path: "dateCompetition", component: DateCompetitionComponent},
   {path: "competitionResult", component: CompetitionResultComponent},
+  {path: "competitionResultTennis", component: CompetitionResultTennisComponent},
   {path: '**', component: LoginComponent}
 ];
 

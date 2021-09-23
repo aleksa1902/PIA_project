@@ -49,14 +49,25 @@ export class AddAthleteJSONComponent implements OnInit {
                     athlete.disciplines.forEach((discipline: string)=>{
                         console.log(athlete.name);
                         if(test){
-                           // this.serviceAthlete.addDiscipline(athlete.name, athlete.surname, discipline);
+                          console.log(athlete.name);
+                          console.log(athlete.surname);
+                          this.serviceAthlete.addDiscipline(athlete.name, athlete.surname, discipline).subscribe(e=>{
+                            if(e['addDiscipline'] !='ok'){
+                              console.log("GRESKA");
+                            }
+                          })
                         }else{
                             test = true;
-                           // this.serviceAthlete.addAthlete(athlete.name, athlete.surname, this.user.country, athlete.gender, discipline);
+                            this.serviceAthlete.addAthlete(athlete.name, athlete.surname, this.user.country, athlete.gender, discipline).subscribe(e=>{
+                              if(e['newAthlete'] !='ok'){
+                                console.log("GRESKA");
+                              }
+                            })
                         }
                     })
                 })
             }
+            this.ruter.navigate(['headOfTheNationalDelegation']);
           }else{
             console.log("NEMAM NIST");
           }

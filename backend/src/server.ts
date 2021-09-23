@@ -420,5 +420,23 @@ router.route('/updateResults').post((req, res)=>{
     
 });
 
+
+// Update tennis result
+router.route('/updateTennisResult').post((req, res)=>{
+    let name = req.body.name;
+    let athletes = req.body.athletes;
+    let format = req.body.format;
+
+    competition.updateOne({competition: name}, { $set: {athletes: athletes, format: format, date: null} }, (e, aa) => {
+        if (e) {
+            console.log(e);
+            res.status(400).json({'updatedTennis':'no'});
+        }
+        else {
+            res.status(200).json({'updatedTennis':'ok'});
+        }
+    })
+});
+
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
