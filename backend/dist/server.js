@@ -325,27 +325,29 @@ router.route('/updateCompetition').post((req, res) => {
     let name = req.body.name;
     let location = req.body.location;
     let date = new Date(req.body.date);
-    console.log("ovo sam dobio od fronta i kreirao sam new Date " + date);
-    competition_1.default.findOne({ "competition": name }, (err, a) => {
+    let testdate = req.body.date;
+    competition_1.default.find({ "location": location }, (err, a) => {
         if (err)
             console.log(err);
         else {
             if (a) {
-                console.log("tu");
-                console.log(date.toString());
-                competition_1.default.updateOne({ competition: name }, { $set: { location: location, date: date } }, (e, aa) => {
-                    if (e) {
-                        console.log(e);
-                        res.status(400).json({ 'updatedComp': 'no' });
-                    }
-                    else {
-                        res.status(200).json({ 'updatedComp': 'ok' });
+                a.forEach(com => {
+                    let comp = com.toObject();
+                    console.log(comp.date.toString(), date.toString());
+                    if (comp.date.toString() == date.toString() && comp.location == location) {
+                        date.setHours(date.getHours() + 1);
                     }
                 });
             }
-            else {
-                res.status(200).json({ 'updatedComp': 'no' });
-            }
+            competition_1.default.updateOne({ competition: name }, { $set: { location: location, date: date } }, (e, aa) => {
+                if (e) {
+                    console.log(e);
+                    res.status(400).json({ 'updatedComp': 'no' });
+                }
+                else {
+                    res.status(200).json({ 'updatedComp': 'ok' });
+                }
+            });
         }
     });
 });

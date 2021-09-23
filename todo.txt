@@ -1,5 +1,2 @@
-1) rang
-2) header problem
-3) puca baza pri dodavanju medalja
-4) problem sa proveravanjem datuma
+1) rang 
 5) sminka
