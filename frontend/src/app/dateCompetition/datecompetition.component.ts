@@ -42,6 +42,7 @@ export class DateCompetitionComponent implements OnInit {
   date: Date;
   time: Date;
   message: string;
+  locations = ['Olympic Stadium', 'Tokyo Metropolitan Gymnasium', 'Yoyogi National Stadium', 'Nippon Budokan', 'Musashino Forest Sport Plaza', 'Tokyo Stadium', 'Ariake Arena', 'Ariake Gymnastics Centre', 'Ariake Tennis Park', 'Asaka Shooting Range', 'Tokyo Aquatics Centre', 'Sapporo Odori Park', 'Musashinonomori Park', 'Fuji International Speedway'];
 
 
   setDate(){
@@ -69,6 +70,14 @@ export class DateCompetitionComponent implements OnInit {
     testDate.setDate(parseInt(day));
     
     console.log(testDate);
+
+    this.serviceCompetition.checkAnotherByLocation(this.location).subscribe((c:Competition[])=>{
+      for(let i = 0; i < c.length; i++){
+        if(testDate.getMonth() == c[i].date.getMonth() && testDate.getDay() == c[i].date.getDay() && testDate.getHours() == c[i].date.getHours() && testDate.getMinutes() == c[i].date.getMinutes()){
+          testDate.setHours(testDate.getHours() + 1);
+        }
+      }
+    })
 
     this.serviceCompetition.updateCompetition(this.comp.competition, this.location, testDate).subscribe(e=>{
       if(e['updatedComp']=='ok'){

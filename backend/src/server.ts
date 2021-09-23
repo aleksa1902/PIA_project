@@ -438,5 +438,15 @@ router.route('/updateTennisResult').post((req, res)=>{
     })
 });
 
+// Get competitions by location
+router.route('/checkAnotherByLocation').post((req, res)=>{
+    let location = req.body.location;
+
+    competition.find({"location": location}, (err, comp)=>{
+        if(err) console.log(err);
+        else res.json(comp);
+    })
+});
+
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));

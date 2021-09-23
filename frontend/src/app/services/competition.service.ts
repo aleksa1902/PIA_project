@@ -66,4 +66,11 @@ export class CompetitionService {
     return this.http.post(`${this.uri}/updateTennisResult`, data); 
   }
 
+  checkAnotherByLocation(location){
+    const data={
+      location: location
+    }
+    return this.http.post(`${this.uri}/checkAnotherByLocation`, data); 
+  }
+
 }

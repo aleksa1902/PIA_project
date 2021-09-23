@@ -6,7 +6,11 @@
         <tr>
             <td>Location:</td>
             <td>
-                <input type='text' name='location' [(ngModel)]='location'>
+                <select name="location" [(ngModel)]="location">
+                    <option *ngFor="let o of locations" value="{{o}}">
+                        {{o}}
+                     </option>
+                </select>
             </td>
         </tr>
         <tr>
