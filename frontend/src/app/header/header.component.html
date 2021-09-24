@@ -10,14 +10,6 @@
             <mat-icon>home</mat-icon>
             <span>Home</span>
           </button>
-          <button (click)='listCountries()' mat-menu-item>
-            <mat-icon>flag</mat-icon>
-            <span>List Countries</span>
-          </button>
-          <button (click)='listMedals()' mat-menu-item>
-            <mat-icon>list_alt</mat-icon>
-            <span>List Medals</span>
-          </button>
           <button (click)='login()' mat-menu-item>
             <mat-icon>list_alt</mat-icon>
             <span>Login</span>
@@ -46,21 +38,9 @@
           <mat-icon>fitness_center</mat-icon>
           <span>Add Sport</span>
         </button>
-        <button (click)="findAthlete()" mat-menu-item>
-          <mat-icon>person</mat-icon>
-          <span>Find Athlete</span>
-        </button>
         <button (click)='addCompetition()' mat-menu-item>
           <mat-icon>playlist_add</mat-icon>
           <span>Add competition</span>
-        </button>
-        <button (click)='listCountries()' mat-menu-item>
-          <mat-icon>flag</mat-icon>
-          <span>List Countries</span>
-        </button>
-        <button (click)='listMedals()' mat-menu-item>
-          <mat-icon>list_alt</mat-icon>
-          <span>List Medals</span>
         </button>
       </mat-menu>
     </span>
@@ -83,14 +63,6 @@
           <mat-icon>apartment</mat-icon>
           <span>Add Athlete JSON</span>
         </button>
-        <button (click)='listCountries()' mat-menu-item>
-          <mat-icon>flag</mat-icon>
-          <span>List Countries</span>
-        </button>
-        <button (click)='listMedals()' mat-menu-item>
-          <mat-icon>list_alt</mat-icon>
-          <span>List Medals</span>
-        </button>
       </mat-menu>
     </span>
 
@@ -107,21 +79,27 @@
           <mat-icon>person</mat-icon>
           <span>Profile</span>
         </button>
-        <button (click)='listCountries()' mat-menu-item>
-          <mat-icon>flag</mat-icon>
-          <span>List Countries</span>
-        </button>
-        <button (click)='listMedals()' mat-menu-item>
-          <mat-icon>list_alt</mat-icon>
-          <span>List Medals</span>
-        </button>
       </mat-menu>
     </span>
 
-      
     <button (click)="goHome()" mat-menu-item>
       <mat-icon class='homeIcon'>home</mat-icon>
       <span>Olympics Games</span>
+    </button>
+
+    <button (click)="listCountries()" mat-menu-item>
+      <mat-icon class='homeIcon'>flag</mat-icon>
+      <span>List Countries</span>
+    </button>
+
+    <button (click)="listMedals()" mat-menu-item>
+      <mat-icon class='homeIcon'>list_alt</mat-icon>
+      <span>List Medals</span>
+    </button>
+
+    <button (click)="findAthlete()" mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>Find Athlete</span>
     </button>
      
     <span class="example-spacer"></span>

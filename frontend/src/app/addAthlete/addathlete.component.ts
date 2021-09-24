@@ -45,34 +45,37 @@ export class AddAthleteComponent implements OnInit {
 
       this.serviceAthlete.findAthlete(this.name, this.surname).subscribe((a : Athlete)=>{
         if(a){      
-          
-            for(let i = 0; i < a.disciplines.length; i++){  
-              if(a.disciplines[i] == discipline && this.disc == false){ 
-                  this.disc = true;
-                  break;
-                }
-            }
-
-            this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
-              if(c){
-                this.message = "Competition has started.";
-              }else{
-                if(this.disc == false){
-                  this.serviceAthlete.addDiscipline(this.name, this.surname, discipline).subscribe(e=>{
-                    if(e['addDiscipline']=='ok'){
-                      this.ruter.navigate(['headOfTheNationalDelegation']);
-                    }else{
-                      console.log("e");
-                      this.message = "Error #1";
-                    }     
-                  })
-                }else{
-                  this.message = "That athlete is already registered for that discipline.";
-                } 
+          this.serviceSport.findSport(a.disciplines[0]).subscribe((s: Sport)=>{
+            if(s.sport != sportName){
+              this.message = "Needs the same sport";
+            }else{
+              for(let i = 0; i < a.disciplines.length; i++){  
+                if(a.disciplines[i] == discipline){ 
+                    this.disc = true;
+                    break;
+                  }
               }
-            })
-
-              
+  
+              this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
+                if(c){
+                  this.message = "Competition has started.";
+                }else{
+                  if(this.disc == false){
+                    this.serviceAthlete.addDiscipline(this.name, this.surname, discipline).subscribe(e=>{
+                      if(e['addDiscipline']=='ok'){
+                        this.ruter.navigate(['headOfTheNationalDelegation']);
+                      }else{
+                        console.log("e");
+                        this.message = "Error #1";
+                      }     
+                    })
+                  }else{
+                    this.message = "That athlete is already registered for that discipline.";
+                  } 
+                }
+              })
+            }
+          })    
         }else{
           this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
             if(c){

@@ -44,4 +44,11 @@ export class SportService {
     return this.http.get(`${this.uri}/getTennis`);
   }
 
+  findSport(disc){
+    const data={
+      disc: disc
+    }
+    return this.http.post(`${this.uri}/findSport`, data);
+  }
+
 }

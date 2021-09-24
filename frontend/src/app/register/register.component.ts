@@ -50,31 +50,48 @@ import { UserService } from '../services/user.service';
           if(user){
             this.message = 'This username is taken.';
           }else{
-            console.log(this.name + " " + this.surname + " " + this.email + " " + this.username + " " + this.password + " "  + this.country + " " + this.userType);
-
-            let testVelikoSlovo = /[A-Z]/.test(this.password);
-            let testTriMalaSlova = /[[a-z].*[a-z].*[a-z]/.test(this.password);
-            let testDvaSpecKaraktera = /[\?\.\*\$\^\&\!\@\#,].*[\?\.\*\$\^\&\!\@\#,]/.test(this.password);
-            let testPocetniKarakter = /^[a-zA-Z]/.test(this.password);
-            let testBrojevi = /\d.*\d/.test(this.password);
-            let testUzastopnaSlova = /[a-z][A-Z]{4}/.test(this.password);
-
-            if(testVelikoSlovo && testTriMalaSlova && testDvaSpecKaraktera && testPocetniKarakter && testBrojevi && !testUzastopnaSlova && this.password.length >= 8 && this.password.length <= 12){
-              this.serviceUser.register(this.name, this.surname, this.email, this.username, this.password, this.country, this.userType).subscribe(ob=>{
-                if(ob['newUser']=='ok'){
-                  console.log('User added');
-                  this.ruter.navigate(['login']);
+            if(this.userType == 'headOfTheNationalDelegation'){
+              this.serviceUser.checkNationalDelegation(this.userType, this.country).subscribe((u: User)=>{
+                if(u){
+                  this.message = 'This country has a national delegate';
                 }else{
-                  console.log("greska");
+                  console.log(this.name + " " + this.surname + " " + this.email + " " + this.username + " " + this.password + " "  + this.country + " " + this.userType);
+
+                  let testVelikoSlovo = /[A-Z]/.test(this.password);
+                  let testTriMalaSlova = /[[a-z].*[a-z].*[a-z]/.test(this.password);
+                  let testDvaSpecKaraktera = /[\?\.\*\$\^\&\!\@\#,].*[\?\.\*\$\^\&\!\@\#,]/.test(this.password);
+                  let testPocetniKarakter = /^[a-zA-Z]/.test(this.password);
+                  let testBrojevi = /\d.*\d/.test(this.password);
+                  let testUzastopnaSlova = /[a-z][A-Z]{4}/.test(this.password);
+
+                  if(!this.validateEmail(this.email)){
+                    this.message = "Wrong email."
+                  }else{
+                    if(testVelikoSlovo && testTriMalaSlova && testDvaSpecKaraktera && testPocetniKarakter && testBrojevi && !testUzastopnaSlova && this.password.length >= 8 && this.password.length <= 12){
+                      this.serviceUser.register(this.name, this.surname, this.email, this.username, this.password, this.country, this.userType).subscribe(ob=>{
+                        if(ob['newUser']=='ok'){
+                          console.log('User added');
+                          this.ruter.navigate(['login']);
+                        }else{
+                          console.log("greska");
+                        }
+                      })
+                    }else{
+                      this.message = "Password creation rules: must have a minimum of 8 characters and a maximum of 12 characters. The minimum number of uppercase letters is 1, the minimum number of lowercase letters is 3, the minimum number of numbers is 2, and the minimum number of special characters is also 2. The initial character must be lowercase or uppercase. The maximum number of consecutive characters is three.";
+                    }
+                  }
                 }
               })
-            }else{
-              this.message = "Password creation rules: must have a minimum of 8 characters and a maximum of 12 characters. The minimum number of uppercase letters is 1, the minimum number of lowercase letters is 3, the minimum number of numbers is 2, and the minimum number of special characters is also 2. The initial character must be lowercase or uppercase. The maximum number of consecutive characters is three.";
             }
           }
         })
 
       }
     }
+
+    validateEmail(email) {
+      const regularExpression = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return regularExpression.test(String(email).toLowerCase());
+     }
   
   }

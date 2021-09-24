@@ -428,6 +428,27 @@ router.route('/checkAnotherByLocation').post((req, res) => {
             res.json(comp);
     });
 });
+// Check national delegation
+router.route('/checkNationalDelegation').post((req, res) => {
+    let userType = req.body.userType;
+    let country = req.body.country;
+    user_1.default.findOne({ "userType": userType, "country": country }, (err, user) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(user);
+    });
+});
+// Find sport
+router.route('/findSport').post((req, res) => {
+    let disc = req.body.disc;
+    sport_1.default.findOne({ "discipline": disc }, (err, sport) => {
+        if (err)
+            console.log(err);
+        else
+            res.json(sport);
+    });
+});
 app.use('/', router);
 app.listen(4000, () => console.log(`Express server running on port 4000`));
 //# sourceMappingURL=server.js.map

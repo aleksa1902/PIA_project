@@ -60,5 +60,11 @@ export class UserService {
     return this.http.post(`${this.uri}/checkDelegate`, data);
   }
 
-
+  checkNationalDelegation(ut, c){
+    const data={
+      userType: ut,
+      country: c
+    }
+    return this.http.post(`${this.uri}/checkNationalDelegation`, data);
+  }
 }
