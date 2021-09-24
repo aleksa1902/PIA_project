@@ -310,7 +310,7 @@ router.route('/getTennis').get((req, res)=>{
 router.route('/checkDelegate').post((req, res)=>{
     let username = req.body.username;
 
-    competition.find({"delegate": username}, (err, comp)=>{
+    competition.find({"delegate": username, "finished": false}, (err, comp)=>{
         if(err) console.log(err);
         else res.json(comp);
     })
@@ -420,7 +420,7 @@ router.route('/updateTennisResult').post((req, res)=>{
     let athletes = req.body.athletes;
     let format = req.body.format;
 
-    competition.updateOne({competition: name}, { $set: {athletes: athletes, format: format, date: null} }, (e, aa) => {
+    competition.updateOne({competition: name}, { $set: {athletes: athletes, format: format, date: null, location: null} }, (e, aa) => {
         if (e) {
             console.log(e);
             res.status(400).json({'updatedTennis':'no'});

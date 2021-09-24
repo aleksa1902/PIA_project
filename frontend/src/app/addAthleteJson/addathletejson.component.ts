@@ -61,7 +61,7 @@ export class AddAthleteJSONComponent implements OnInit {
                             this.serviceAthlete.addAthlete(athlete.name, athlete.surname, this.user.country, athlete.gender, discipline).subscribe(e=>{
                               if(e['newAthlete'] !='ok'){
                                 console.log("GRESKA");
-                              }
+                              }      
                             })
                         }
                     })
@@ -69,9 +69,12 @@ export class AddAthleteJSONComponent implements OnInit {
             }
             this.ruter.navigate(['headOfTheNationalDelegation']);
           }else{
+            this.message = "Error";
             console.log("NEMAM NIST");
           }
         }
+    }else{
+      this.message = "You did not select a file.";
     }
   }
   

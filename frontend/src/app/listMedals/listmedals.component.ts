@@ -24,8 +24,8 @@ import { CountryMedal } from '../model/countryMedal.model';
             this.countries = countries;
             
             this.countries.sort((first, second)=>{
-              let f = first.goldMedals + first.silverMedals + first.bronzeMedals;
-              let s = second.goldMedals + second.silverMedals + second.bronzeMedals;
+              let f = first.goldMedals;
+              let s = second.goldMedals;
               return s - f;
             })
 

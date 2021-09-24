@@ -303,7 +303,7 @@ router.route('/getTennis').get((req, res) => {
 // Check delegate
 router.route('/checkDelegate').post((req, res) => {
     let username = req.body.username;
-    competition_1.default.find({ "delegate": username }, (err, comp) => {
+    competition_1.default.find({ "delegate": username, "finished": false }, (err, comp) => {
         if (err)
             console.log(err);
         else
@@ -408,7 +408,7 @@ router.route('/updateTennisResult').post((req, res) => {
     let name = req.body.name;
     let athletes = req.body.athletes;
     let format = req.body.format;
-    competition_1.default.updateOne({ competition: name }, { $set: { athletes: athletes, format: format, date: null } }, (e, aa) => {
+    competition_1.default.updateOne({ competition: name }, { $set: { athletes: athletes, format: format, date: null, location: null } }, (e, aa) => {
         if (e) {
             console.log(e);
             res.status(400).json({ 'updatedTennis': 'no' });

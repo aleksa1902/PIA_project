@@ -5,19 +5,19 @@
         <tr>
             <td>Name:</td>
             <td>
-                <input type='text' name='name' [(ngModel)]='name'>
+                <input type='text' name='name' [(ngModel)]='name' required>
             </td>
         </tr>
         <tr>
             <td>Surname:</td>
             <td>
-                <input type='text' name='surname' [(ngModel)]='surname'>
+                <input type='text' name='surname' [(ngModel)]='surname' required>
             </td>
         </tr>
         <tr>
             <td>Gender:</td>
             <td>
-                <select name="Gender" [(ngModel)]="gender">
+                <select name="Gender" [(ngModel)]="gender" required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                 </select>
@@ -26,7 +26,7 @@
         <tr>
             <td>Discipline:</td>
             <td>
-                <select name="discipline" [(ngModel)]="discipline">
+                <select name="discipline" [(ngModel)]="discipline" required>
                     <option *ngFor="let s of sports" value="{{s.sport}},{{s.discipline}}">
                         {{s.sport}} - {{s.discipline}}
                      </option>
