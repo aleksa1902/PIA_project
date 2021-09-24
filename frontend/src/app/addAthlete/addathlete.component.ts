@@ -35,43 +35,45 @@ export class AddAthleteComponent implements OnInit {
   gender: string;
   sports: Sport[];
   message: string;
+  disc = false;
 
   addAthlete(){
-    let sportName = this.discipline.split(",")[0];
-    let discipline = this.discipline.split(",")[1];
-
     if(this.name != undefined && this.surname != undefined && this.discipline != undefined && this.gender != undefined){
+      let sportName = this.discipline.split(",")[0];
+      let discipline = this.discipline.split(",")[1];
+
+
       this.serviceAthlete.findAthlete(this.name, this.surname).subscribe((a : Athlete)=>{
-        if(a){
-            let disc = false;
-        
-            for(let i = 0; i < a.disciplines.length; i++){
-                if(a.disciplines[i] == this.discipline){
-                    disc = true;
-                    break;
+        if(a){      
+          
+            for(let i = 0; i < a.disciplines.length; i++){  
+              if(a.disciplines[i] == discipline && this.disc == false){ 
+                  this.disc = true;
+                  break;
                 }
             }
 
             this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
               if(c){
-                this.message = "Competition has started";
+                this.message = "Competition has started.";
               }else{
-                if(!disc){
+                if(this.disc == false){
                   this.serviceAthlete.addDiscipline(this.name, this.surname, discipline).subscribe(e=>{
                     if(e['addDiscipline']=='ok'){
                       this.ruter.navigate(['headOfTheNationalDelegation']);
                     }else{
+                      console.log("e");
                       this.message = "Error #1";
                     }     
                   })
+                }else{
+                  this.message = "That athlete is already registered for that discipline.";
                 } 
               }
             })
 
               
         }else{
-          //console.log("OVDE SAM");
-          //console.log(this.name + " " + this.surname + " " + this.gender + " " + this.user.country + " " + this.discipline);
           this.serviceAthlete.competitionStart(sportName, discipline).subscribe((c:Competition)=>{
             if(c){
               this.message = "Competition has started";
@@ -89,7 +91,7 @@ export class AddAthleteComponent implements OnInit {
         }
         })
     }else{
-      this.message = "Something wrong";
+      this.message = "Enter all fields.";
     }
   }
   
