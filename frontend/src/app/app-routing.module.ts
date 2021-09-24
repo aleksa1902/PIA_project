@@ -11,6 +11,7 @@ import { CompetitionResultTennisComponent } from './competitionResultTennis/comp
 import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
 import { FindAthleteComponent } from './findAthlete/findathlete.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
+import { HomeComponent } from './home/home.component';
 import { ListCountriesComponent } from './listCountries/listcountries.component';
 import { ListMedalsComponent } from './listMedals/listmedals.component';
 import { LoginComponent } from './login/login.component';
@@ -18,7 +19,8 @@ import { OrganizerComponent } from './organizer/organizer.component';
 import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
-  {path: "", component: LoginComponent},
+  {path: "", component: HomeComponent},
+  {path: "home", component: HomeComponent},
   {path: "login", component: LoginComponent},
   {path: "organizer", component: OrganizerComponent},
   {path: "competitionDelegate", component: CompetitionDelegateComponent},
@@ -35,7 +37,7 @@ const routes: Routes = [
   {path: "dateCompetition", component: DateCompetitionComponent},
   {path: "competitionResult", component: CompetitionResultComponent},
   {path: "competitionResultTennis", component: CompetitionResultTennisComponent},
-  {path: '**', component: LoginComponent}
+  {path: '**', component: HomeComponent}
 ];
 
 @NgModule({

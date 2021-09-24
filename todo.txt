@@ -1,7 +1,2 @@
-1) rang
-2) password
-3) header
-5) puca baza pri dodavanju medalja
-6) sminka
-
-- srediti lokacije pa da mozemo da proveravamo vreme
+1) rang 
+2) sminka

@@ -10,10 +10,30 @@
             <mat-icon>home</mat-icon>
             <span>Home</span>
           </button>
+          <button (click)='listCountries()' mat-menu-item>
+            <mat-icon>flag</mat-icon>
+            <span>List Countries</span>
+          </button>
+          <button (click)='listMedals()' mat-menu-item>
+            <mat-icon>list_alt</mat-icon>
+            <span>List Medals</span>
+          </button>
+          <button (click)='login()' mat-menu-item>
+            <mat-icon>list_alt</mat-icon>
+            <span>Login</span>
+          </button>
+          <button (click)='routerRegister()' mat-menu-item>
+            <mat-icon>list_alt</mat-icon>
+            <span>Register</span>
+          </button>
+          <button (click)='changePassword()' mat-menu-item>
+            <mat-icon>list_alt</mat-icon>
+            <span>Change password</span>
+          </button>
         </mat-menu>
       </span>
 
-    <span *ngIf='user && user.type == 0'>
+    <span *ngIf='user && user.userType == organizer'>
       <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
@@ -22,23 +42,59 @@
           <mat-icon>home</mat-icon>
           <span>Home</span>
         </button>
-        <button (click)='myProfile()' mat-menu-item>
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
+        <button (click)='addSport()' mat-menu-item>
+          <mat-icon>fitness_center</mat-icon>
+          <span>Add Sport</span>
         </button>
-        <button (click)="addUser()" mat-menu-item>
+        <button (click)="findAthlete()" mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Find Athlete</span>
+        </button>
+        <button (click)='addCompetition()' mat-menu-item>
+          <mat-icon>playlist_add</mat-icon>
+          <span>Add competition</span>
+        </button>
+        <button (click)='listCountries()' mat-menu-item>
+          <mat-icon>flag</mat-icon>
+          <span>List Countries</span>
+        </button>
+        <button (click)='listMedals()' mat-menu-item>
+          <mat-icon>list_alt</mat-icon>
+          <span>List Medals</span>
+        </button>
+      </mat-menu>
+    </span>
+
+
+    <span *ngIf='user && user.userType == headOfTheNationalDelegation'>
+      <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu"> 
+        <button (click)='goHome()' mat-menu-item>
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </button>
+        <button (click)='addAthlete()' mat-menu-item>
           <mat-icon>person_add</mat-icon>
-          <span>Add user</span>
+          <span>add Athlete</span>
         </button>
-        <button (click)='addRealEstate()' mat-menu-item>
+        <button (click)='addAthleteJSON()' mat-menu-item>
           <mat-icon>apartment</mat-icon>
-          <span>Add real estate</span>
+          <span>Add Athlete JSON</span>
+        </button>
+        <button (click)='listCountries()' mat-menu-item>
+          <mat-icon>flag</mat-icon>
+          <span>List Countries</span>
+        </button>
+        <button (click)='listMedals()' mat-menu-item>
+          <mat-icon>list_alt</mat-icon>
+          <span>List Medals</span>
         </button>
       </mat-menu>
     </span>
 
-
-    <span *ngIf='user && user.type == 1'>
+    <span *ngIf='user && user.userType == competitionDelegate'>
       <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
       </button>
@@ -51,63 +107,32 @@
           <mat-icon>person</mat-icon>
           <span>Profile</span>
         </button>
-        <button (click)='addRealEstate()' mat-menu-item>
-          <mat-icon>apartment</mat-icon>
-          <span>Add real estate</span>
+        <button (click)='listCountries()' mat-menu-item>
+          <mat-icon>flag</mat-icon>
+          <span>List Countries</span>
         </button>
-        <button (click)="promote()" mat-menu-item>
-          <mat-icon>trending_up</mat-icon>
-          <span>Promote</span>
-        </button>
-      </mat-menu>
-    </span>
-
-    <span *ngIf='user && user.type == 2'>
-      <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu"> 
-        <button (click)='goHome()' mat-menu-item>
-          <mat-icon>home</mat-icon>
-          <span>Home</span>
-        </button>
-        <button (click)='myProfile()' mat-menu-item>
-          <mat-icon>person</mat-icon>
-          <span>Profile</span>
-        </button>
-        <button (click)='addRealEstate()' mat-menu-item>
-          <mat-icon>add_circle</mat-icon>
-          <span>Add real estate</span>
-        </button>
-        <button (click)="myRealEstates()" mat-menu-item>
-          <mat-icon>apartment</mat-icon>
-          <span>My real estates</span>
+        <button (click)='listMedals()' mat-menu-item>
+          <mat-icon>list_alt</mat-icon>
+          <span>List Medals</span>
         </button>
       </mat-menu>
     </span>
 
       
-      <button (click)="goHome()" mat-menu-item>
-        <mat-icon class='homeIcon'>home</mat-icon>
-        <span class='agencyName'>Real Real Estate</span>
-      </button>
+    <button (click)="goHome()" mat-menu-item>
+      <mat-icon class='homeIcon'>home</mat-icon>
+      <span>Olympics Games</span>
+    </button>
      
-      <span class="example-spacer"></span>
-      <div class="example-button-row">
-        <div *ngIf="user; else noUser">
-          <a mat-raised-button routerLink="profile"> {{user.username}}</a>
-           <span>&nbsp;</span>
-          <button mat-raised-button (click)="logout()">Logout</button>
-        </div>
-        
-        <ng-template #noUser>
-          <span>
-            <a mat-raised-button routerLink="login">Login</a> or
-            <a mat-raised-button routerLink="register">Register</a>
-          </span>
-      </ng-template>
-      
+    <span class="example-spacer"></span>
+    <div class="example-button-row">
+      <div *ngIf="user;">
+        <a mat-raised-button> {{user.name}} {{user.surname}}</a>
+          <span>&nbsp;</span>
+        <button mat-raised-button (click)="logout()">Logout</button>
       </div>
-    </mat-toolbar>
+    
+    </div>
+  </mat-toolbar>
 
   </div>

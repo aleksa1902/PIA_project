@@ -24,11 +24,20 @@ import { AddCompetitionComponent } from './addCompetition/addCompetition.compone
 import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
 import { CompetitionResultComponent } from './competitionResult/competitionresult.component';
 import { CompetitionResultTennisComponent } from './competitionResultTennis/competitionresulttennis.component';
-
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
     AppComponent,
+    HomeComponent,
+    HeaderComponent,
     LoginComponent,
     OrganizerComponent,
     CompetitionDelegateComponent,
@@ -53,7 +62,13 @@ import { CompetitionResultTennisComponent } from './competitionResultTennis/comp
     HttpClientModule,
     NoopAnimationsModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -331,27 +331,31 @@ router.route('/updateCompetition').post((req, res)=>{
     let name = req.body.name;
     let location = req.body.location;
     let date = new Date(req.body.date);
+    let testdate = req.body.date;
 
-    console.log(name);
-
-    competition.findOne({"competition": name}, (err, a)=>{
+    competition.find({"location": location}, (err, a)=>{
         if(err) console.log(err);
         else {
             if(a){
-                console.log("tu");
-                console.log(date.toString());
-                competition.updateOne({competition: name}, { $set: {location: location, date: date} }, (e, aa) => {
-                    if (e) {
-                        console.log(e);
-                        res.status(400).json({'updatedComp':'no'});
+                a.forEach(com => {
+                    let comp = com.toObject();
+                    console.log(comp.date.toString(), date.toString());
+                    if (comp.date.toString() == date.toString() && comp.location == location) {
+                        date.setHours(date.getHours() + 1);
                     }
-                    else {
-                        res.status(200).json({'updatedComp':'ok'});
-                    }
-                })
-            }else{
-                res.status(200).json({'updatedComp':'no'});
+                });              
             }
+            
+            competition.updateOne({competition: name}, { $set: {location: location, date: date} }, (e, aa) => {
+                if (e) {
+                    console.log(e);
+                    res.status(400).json({'updatedComp':'no'});
+                }
+                else {
+                    res.status(200).json({'updatedComp':'ok'});
+                }
+            })
+            
         }
     })
 });
@@ -374,52 +378,41 @@ router.route('/updateResults').post((req, res)=>{
     let silverC = req.body.sc;
     let bronzeC = req.body.bc;
 
-    console.log(goldC);
     country.updateOne({name: goldC}, {$inc: {'goldMedals': 1}}, (e, a)=>{
         if (e) {
             console.log(e);
-            res.status(200).json({'gold':'no'});
+            res.status(400).json({'medal':'no'});
         }
         else {
-            res.status(200).json({'gold':'ok'});
+            country.updateOne({name: silverC}, {$inc: {'silverMedals': 1}}, (e, a)=>{
+                if (e) {
+                    console.log(e);
+                    res.status(400).json({'medal':'no'});
+                }
+                else {
+                    console.log(bronzeC);
+                    country.updateOne({name: bronzeC}, {$inc: {'bronzeMedals': 1}}, (e, a)=>{
+                        if (e) {
+                            console.log(e);
+                            res.status(400).json({'medal':'no'});
+                        }
+                        else {
+                            competition.updateOne({competition: name}, { $set: {'finished': true} }, (e, aa) => {
+                                if (e) {
+                                    console.log(e);
+                                    res.status(400).json({'medal':'no'});
+                                }
+                                else {
+                                    res.status(200).json({'medal':'ok'});
+                                }
+                            })
+                        }
+                    });
+                }
+            });
         }
     });
-
-    console.log(silverC);
-    country.updateOne({name: silverC}, {$inc: {'silverMedals': 1}}, (e, a)=>{
-        if (e) {
-            console.log(e);
-            res.status(200).json({'silver':'no'});
-        }
-        else {
-            res.status(200).json({'silver':'ok'});
-        }
-    });
-
-    console.log(bronzeC);
-    country.updateOne({name: bronzeC}, {$inc: {'bronzeMedals': 1}}, (e, a)=>{
-        if (e) {
-            console.log(e);
-            res.status(200).json({'bronze':'no'});
-        }
-        else {
-            res.status(200).json({'bronze':'ok'});
-        }
-    });
-
-    competition.updateOne({name: name}, {$set: {'finished': true}}, (e, a)=>{
-        if (e) {
-            console.log(e);
-            res.status(200).json({'gg':'no'});
-        }
-        else {
-            res.status(200).json({'gg':'ok'});
-        }
-    })
-
-    
 });
-
 
 // Update tennis result
 router.route('/updateTennisResult').post((req, res)=>{

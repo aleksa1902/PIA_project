@@ -5,6 +5,7 @@ import { CountryService } from '../services/country.service';
 
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
+import { CountryMedal } from '../model/countryMedal.model';
 
 
 @Component({
@@ -28,7 +29,19 @@ import {MatTableDataSource} from '@angular/material/table';
               return s - f;
             })
 
-            this.dataSource = new MatTableDataSource<Country>(this.countries);
+            for(let i = 0; i < this.countries.length; i++){
+              this.test[i] = new CountryMedal();
+              this.test[i].index = i + 1;
+              this.test[i].name = this.countries[i].name;
+              this.test[i].goldMedals = this.countries[i].goldMedals;
+              this.test[i].silverMedals = this.countries[i].silverMedals;
+              this.test[i].bronzeMedals = this.countries[i].bronzeMedals;
+            }
+
+            console.log(this.test);
+
+            this.dataSource = new MatTableDataSource<CountryMedal>(this.test);
+            console.log(this.dataSource);
             this.dataSource.paginator = this.paginator;
             console.log(this.dataSource);
           });
@@ -37,8 +50,9 @@ import {MatTableDataSource} from '@angular/material/table';
     ngAfterViewInit() {
       
     }
-  
+    
+    test: CountryMedal[] = [];
     countries : Country[];
-    dataSource: MatTableDataSource<Country>;
+    dataSource: MatTableDataSource<CountryMedal>;
     
   }

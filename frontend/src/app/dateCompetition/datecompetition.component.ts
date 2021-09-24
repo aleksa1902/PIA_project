@@ -64,20 +64,14 @@ export class DateCompetitionComponent implements OnInit {
     let testDate = new Date();
     testDate.setHours(parseInt(hour));
     testDate.setMinutes(parseInt(minute));
+    testDate.setSeconds(0);
+    testDate.setMilliseconds(0);
     
     testDate.setFullYear(parseInt(year));
     testDate.setMonth(parseInt(month));
     testDate.setDate(parseInt(day));
     
     console.log(testDate);
-
-    this.serviceCompetition.checkAnotherByLocation(this.location).subscribe((c:Competition[])=>{
-      for(let i = 0; i < c.length; i++){
-        if(testDate.getMonth() == c[i].date.getMonth() && testDate.getDay() == c[i].date.getDay() && testDate.getHours() == c[i].date.getHours() && testDate.getMinutes() == c[i].date.getMinutes()){
-          testDate.setHours(testDate.getHours() + 1);
-        }
-      }
-    })
 
     this.serviceCompetition.updateCompetition(this.comp.competition, this.location, testDate).subscribe(e=>{
       if(e['updatedComp']=='ok'){

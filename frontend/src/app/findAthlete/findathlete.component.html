@@ -26,14 +26,14 @@
         </tr>
         <tr>
             <td colspan='2'>
-                <input type='button' value='Find athletes' (click)='findAthletes()'>
+                <button mat-flat-button color="primary" (click)='findAthletes()'>Find athletes</button>
             </td>
         </tr>
     </table>
 </form>
 
 <div class="mat-elevation-z8">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" width="100%">
   
       <!-- Name Column -->
       <ng-container matColumnDef="name">

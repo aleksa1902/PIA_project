@@ -1,8 +1,5 @@
 <b>welcome to the Olympics Log in site</b>
-<input type='button' value='Register' (click)='routerRegister()'>
-<input type='button' value='Change password' (click)='changePassword()'>
-<input type='button' value='List countries' (click)='listCountries()'>
-<input type='button' value='List medals' (click)='listMedals()'>
+
 <hr/>
 <form>
     <table>
@@ -20,7 +17,7 @@
         </tr>
         <tr>
             <td colspan='2'>
-                <input type='button' value='Log In' (click)='loginToTheSystem()'>
+                <button mat-flat-button color="primary" (click)='loginToTheSystem()'>Login</button>
             </td>
         </tr>
     </table>

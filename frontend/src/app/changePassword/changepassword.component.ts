@@ -31,13 +31,27 @@ import { UserService } from '../services/user.service';
                 }else if(this.oldPassword == this.newPassword){
                     this.message = "The old and new password are the same.";
                 }else{
-                    this.serviceUser.changePassword(this.username, this.newPassword).subscribe(s=>{
-                        if(s['changePass'] == "ok"){
-                            this.ruter.navigate(['login']);
-                        }else{
-                            this.message = "Greska";
-                        }
-                    })
+
+                    let testVelikoSlovo = /[A-Z]/.test(this.newPassword);
+                    let testTriMalaSlova = /[[a-z].*[a-z].*[a-z]/.test(this.newPassword);
+                    let testDvaSpecKaraktera = /[\?\.\*\$\^\&\!\@\#,].*[\?\.\*\$\^\&\!\@\#,]/.test(this.newPassword);
+                    let testPocetniKarakter = /^[a-zA-Z]/.test(this.newPassword);
+                    let testBrojevi = /\d.*\d/.test(this.newPassword);
+                    let testUzastopnaSlova = /[a-z][A-Z]{4}/.test(this.newPassword);
+
+                    if(testVelikoSlovo && testTriMalaSlova && testDvaSpecKaraktera && testPocetniKarakter && testBrojevi && !testUzastopnaSlova && this.newPassword.length >= 8 && this.newPassword.length <= 12){
+                        this.serviceUser.changePassword(this.username, this.newPassword).subscribe(s=>{
+                            if(s['changePass'] == "ok"){
+                                this.ruter.navigate(['login']);
+                            }else{
+                                this.message = "Greska";
+                            }
+                        })
+                    }else{
+                        this.message = "Password creation rules: must have a minimum of 8 characters and a maximum of 12 characters. The minimum number of uppercase letters is 1, the minimum number of lowercase letters is 3, the minimum number of numbers is 2, and the minimum number of special characters is also 2. The initial character must be lowercase or uppercase. The maximum number of consecutive characters is three.";
+                    }
+
+                    
                 }
             }
         })

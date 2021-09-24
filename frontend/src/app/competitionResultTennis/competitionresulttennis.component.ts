@@ -21,7 +21,7 @@ export class CompetitionResultTennisComponent implements OnInit {
     if(this.user.userType != "competitionDelegate"){
       this.ruter.navigate(['login']);
     }
-    let name = JSON.parse(localStorage.getItem('setDate'));
+    let name = JSON.parse(localStorage.getItem('setResult'));
     console.log(name);
 
     if(name){
@@ -117,9 +117,6 @@ export class CompetitionResultTennisComponent implements OnInit {
       this.serviceAthlete.getAthleteByNameSurname(name, surname).subscribe((a: Athlete)=>{
         if(a){
           this.goldAthlete = a;
-         
-          console.log("GOLD");
-          console.log(a);
   
           name = lossers[0].split(',')[0];
           surname = lossers[0].split(',')[1];
@@ -127,9 +124,6 @@ export class CompetitionResultTennisComponent implements OnInit {
           this.serviceAthlete.getAthleteByNameSurname(name, surname).subscribe((a: Athlete)=>{
             if(a){
               this.silverAthlete = a;
-
-              console.log("SILVER");
-              console.log(a);
   
               name = winners[1].split(',')[0];
               surname = winners[1].split(',')[1];
@@ -137,13 +131,11 @@ export class CompetitionResultTennisComponent implements OnInit {
               this.serviceAthlete.getAthleteByNameSurname(name, surname).subscribe((a: Athlete)=>{
                 if(a){
                   this.bronzeAthlete = a;
-
-                  console.log("BRONZE");
-                  console.log(a);
   
                   this.serviceCompetition.updateResults(this.competition.competition, this.goldAthlete[0].country, this.silverAthlete[0].country, this.bronzeAthlete[0].country).subscribe(e=>{
-                    if(e['gold']=='ok' && e['silver']=='ok' && e['bronze']=='ok'){
+                    if(e['medal']=='ok'){
                       console.log("KUL");
+                      this.ruter.navigate(['competitionDelegate']);
                     }else{
                       console.log("NOT KUL");
                     }
