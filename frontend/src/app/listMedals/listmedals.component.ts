@@ -24,9 +24,20 @@ import { CountryMedal } from '../model/countryMedal.model';
             this.countries = countries;
             
             this.countries.sort((first, second)=>{
-              let f = first.goldMedals;
-              let s = second.goldMedals;
-              return s - f;
+              //let f = first.goldMedals;
+              //let s = second.goldMedals;
+              //return s - f;
+
+              if(first.goldMedals == second.goldMedals){
+                if(first.silverMedals == second.silverMedals){
+                  return second.bronzeMedals - first.bronzeMedals;
+                }else{
+                  return second.silverMedals - first.silverMedals;
+                }
+              }else{
+                return second.goldMedals - first.goldMedals;
+              }
+
             })
 
             for(let i = 0; i < this.countries.length; i++){

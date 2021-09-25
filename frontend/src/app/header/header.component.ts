@@ -76,5 +76,9 @@ export class HeaderComponent implements OnInit {
   login(){
     this.ruter.navigate(['login']);
   }
+
+  finishedCompetitions(){
+    this.ruter.navigate(['finishedCompetition']);
+  }
   
 }

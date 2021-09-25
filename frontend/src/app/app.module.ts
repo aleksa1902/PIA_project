@@ -32,6 +32,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import { FinishedCompetitionComponent } from './finishedCompetitions/finishedcompetition.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {MatInputModule} from '@angular/material/input';
     AddCompetitionComponent,
     DateCompetitionComponent,
     CompetitionResultComponent,
-    CompetitionResultTennisComponent
+    CompetitionResultTennisComponent,
+    FinishedCompetitionComponent
   ],
   imports: [
     BrowserModule,

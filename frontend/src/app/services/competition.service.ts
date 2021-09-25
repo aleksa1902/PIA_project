@@ -21,7 +21,8 @@ export class CompetitionService {
       time: null,
       delegate: delegate,
       finished: finished,
-      athletes: athlete
+      athletes: athlete,
+      results: null
     }
 
     return this.http.post(`${this.uri}/addCompetition`, data); 
@@ -31,35 +32,44 @@ export class CompetitionService {
     return this.http.get(`${this.uri}/getAllCompetition`);
   }
 
-  getCompetition(name){
+  getCompetition(name, sport, discipline){
     const data={
-      name: name
+      name: name,
+      sport: sport,
+      discipline: discipline
     }
     return this.http.post(`${this.uri}/getCompetition`, data); 
   }
 
-  updateCompetition(name, location, date){
+  updateCompetition(name, sport, discipline, location, date){
     const data={
       name: name,
+      sport: sport,
+      discipline: discipline,
       location: location,
       date: date
     }
     return this.http.post(`${this.uri}/updateCompetition`, data); 
   }
 
-  updateResults(name, gc, sc, bc){
+  updateResults(name, sport, discipline, gc, sc, bc, results){
     const data={
       name: name,
+      sport: sport,
+      discipline: discipline,
       gc: gc,
       sc: sc,
-      bc: bc
+      bc: bc,
+      results: results
     }
     return this.http.post(`${this.uri}/updateResults`, data); 
   }
 
-  updateTennisResult(name, athletes, format){
+  updateTennisResult(name, sport, discipline, athletes, format){
     const data={
       name: name,
+      sport: sport,
+      discipline: discipline,
       athletes: athletes,
       format: format
     }
@@ -71,6 +81,10 @@ export class CompetitionService {
       location: location
     }
     return this.http.post(`${this.uri}/checkAnotherByLocation`, data); 
+  }
+
+  getFinishedCompetitions(){
+    return this.http.get(`${this.uri}/getFinishedCompetitions`);
   }
 
 }

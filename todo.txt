@@ -1,1 +1,7 @@
-2) sminka
+fix problem : competition ne po imenu vec po disciplini !!!
+
+ng add @angular/material
+
+OVO DODATI U FAJLOVE
+
+db.getCollection('competitions').find({}).TOARRAY()

@@ -319,8 +319,10 @@ router.route('/checkDelegate').post((req, res)=>{
 // Get competition
 router.route('/getCompetition').post((req, res)=>{
     let name = req.body.name;
+    let sport = req.body.sport;
+    let discipline = req.body.discipline;
 
-    competition.findOne({"competition": name}, (err, comp)=>{
+    competition.findOne({"competition": name, "sport": sport, "discipline": discipline, "finished": false}, (err, comp)=>{
         if(err) console.log(err);
         else res.json(comp);
     })
@@ -330,10 +332,12 @@ router.route('/getCompetition').post((req, res)=>{
 router.route('/updateCompetition').post((req, res)=>{
     let name = req.body.name;
     let location = req.body.location;
+    let sport = req.body.sport;
+    let discipline = req.body.discipline;
     let date = new Date(req.body.date);
     let testdate = req.body.date;
 
-    competition.find({"location": location}, (err, a)=>{
+    competition.find({"location": location, "finished": false}, (err, a)=>{
         if(err) console.log(err);
         else {
             if(a){
@@ -346,7 +350,7 @@ router.route('/updateCompetition').post((req, res)=>{
                 });              
             }
             
-            competition.updateOne({competition: name}, { $set: {location: location, date: date} }, (e, aa) => {
+            competition.updateOne({competition: name, sport: sport, discipline: discipline, finished: false}, { $set: {location: location, date: date} }, (e, aa) => {
                 if (e) {
                     console.log(e);
                     res.status(400).json({'updatedComp':'no'});
@@ -365,7 +369,7 @@ router.route('/competitionStart').post((req, res)=>{
     let sport = req.body.sport;
     let discipline = req.body.discipline;
 
-    competition.findOne({"sport":sport, "discipline":discipline}, (err, comp)=>{
+    competition.findOne({"sport":sport, "discipline":discipline, "finished": false}, (err, comp)=>{
         if(err) console.log(err);
         else res.json(comp);
     })
@@ -374,9 +378,12 @@ router.route('/competitionStart').post((req, res)=>{
 // Add discipline in athlete
 router.route('/updateResults').post((req, res)=>{
     let name = req.body.name;
+    let sport = req.body.sport;
+    let discipline = req.body.discipline;
     let goldC = req.body.gc;
     let silverC = req.body.sc;
     let bronzeC = req.body.bc;
+    let results = req.body.results;
 
     country.updateOne({name: goldC}, {$inc: {'goldMedals': 1}}, (e, a)=>{
         if (e) {
@@ -397,7 +404,7 @@ router.route('/updateResults').post((req, res)=>{
                             res.status(400).json({'medal':'no'});
                         }
                         else {
-                            competition.updateOne({competition: name}, { $set: {'finished': true} }, (e, aa) => {
+                            competition.updateOne({competition: name, sport: sport, discipline: discipline}, { $set: {'results':results,'finished': true} }, (e, aa) => {
                                 if (e) {
                                     console.log(e);
                                     res.status(400).json({'medal':'no'});
@@ -417,10 +424,12 @@ router.route('/updateResults').post((req, res)=>{
 // Update tennis result
 router.route('/updateTennisResult').post((req, res)=>{
     let name = req.body.name;
+    let sport = req.body.sport;
+    let discipline = req.body.discipline;
     let athletes = req.body.athletes;
     let format = req.body.format;
 
-    competition.updateOne({competition: name}, { $set: {athletes: athletes, format: format, date: null, location: null} }, (e, aa) => {
+    competition.updateOne({competition: name, sport: sport, discipline: discipline}, { $set: {athletes: athletes, format: format, date: null, location: null} }, (e, aa) => {
         if (e) {
             console.log(e);
             res.status(400).json({'updatedTennis':'no'});
@@ -459,6 +468,15 @@ router.route('/findSport').post((req, res)=>{
     sport.findOne({"discipline":disc}, (err, sport)=>{
         if(err) console.log(err);
         else res.json(sport);
+    })
+});
+
+// Find sport
+router.route('/getFinishedCompetitions').get((req, res)=>{
+
+    competition.find({"finished": true}, (err, comp)=>{
+        if(err) console.log(err);
+        else res.json(comp);
     })
 });
 

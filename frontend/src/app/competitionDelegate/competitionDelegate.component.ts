@@ -22,7 +22,6 @@ export class CompetitionDelegateComponent implements OnInit {
     this.serviceUser.checkDelegate(this.user.username).subscribe((c: Competition[])=>{
         this.dataSource = new MatTableDataSource<Competition>(c);
     })
-    
   }
 
   user: User;
@@ -36,23 +35,26 @@ export class CompetitionDelegateComponent implements OnInit {
     this.ruter.navigate(['']);
   }
 
-  setDate(name){
+  setDate(name, sport, discipline){
     localStorage.setItem('setDate', JSON.stringify(name));
+    localStorage.setItem('setDate1', JSON.stringify(sport));
+    localStorage.setItem('setDate2', JSON.stringify(discipline));
     console.log(name);
     this.ruter.navigate(['dateCompetition']);
   }
 
-  setResult(name){
+  setResult(name, sport, discipline){
     localStorage.setItem('setResult', JSON.stringify(name));
+    localStorage.setItem('setResult1', JSON.stringify(sport));
+    localStorage.setItem('setResult2', JSON.stringify(discipline));
     console.log(name);
     
-    this.serivceCompetition.getCompetition(name).subscribe((c: Competition)=>{
-      if(c.sport == 'tennis'){
-        this.ruter.navigate(['competitionResultTennis']);
-      }else{
-        this.ruter.navigate(['competitionResult']);
-      }
-    })
+    if(sport == 'tennis'){
+      this.ruter.navigate(['competitionResultTennis']);
+    }else{
+      this.ruter.navigate(['competitionResult']);
+    }
+
   }
 
 }

@@ -45,53 +45,143 @@ export class FindAthleteComponent implements OnInit {
 
   findAthletes(){
     if(this.name == undefined && this.surname == undefined && this.sport == undefined){
+      console.log("nista");
       this.serviceAthlete.getAllAthletes().subscribe((a : Athlete[])=>{
         this.athletes = a;
         this.dataSource = new MatTableDataSource<Athlete>(a);
         this.dataSource.paginator = this.paginator;
       })
     }else if(this.name != undefined && this.surname == undefined && this.sport == undefined){
-      this.serviceAthlete.getAthleteByName(this.name).subscribe((a : Athlete[])=>{
-        this.athletes = a;
-        this.dataSource = new MatTableDataSource<Athlete>(a);
-        this.dataSource.paginator = this.paginator;
-      })
+      if(this.name == ""){
+        console.log("nista");
+        this.serviceAthlete.getAllAthletes().subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else{
+        console.log("ime");
+        this.serviceAthlete.getAthleteByName(this.name).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }
     }else if(this.name == undefined && this.surname != undefined && this.sport == undefined){
-      this.serviceAthlete.getAthleteBySurname(this.surname).subscribe((a : Athlete[])=>{
-        this.athletes = a;
-        this.dataSource = new MatTableDataSource<Athlete>(a);
-        this.dataSource.paginator = this.paginator;
-      })
+      if(this.surname == ""){
+        console.log("nista");
+        this.serviceAthlete.getAllAthletes().subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else{
+        console.log("prezime");
+        this.serviceAthlete.getAthleteBySurname(this.surname).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }    
     }else if(this.name != undefined && this.surname != undefined && this.sport == undefined){
-      this.serviceAthlete.getAthleteByNameSurname(this.name, this.surname).subscribe((a : Athlete[])=>{
-        this.athletes = a;
-        this.dataSource = new MatTableDataSource<Athlete>(a);
-        this.dataSource.paginator = this.paginator;
-      })
+      if(this.name == "" && this.surname == ""){
+        console.log("nista");
+        this.serviceAthlete.getAllAthletes().subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else if(this.name == "" && this.surname != ""){
+        console.log("prezime");
+        this.serviceAthlete.getAthleteBySurname(this.surname).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else if(this.name != "" && this.surname == ""){
+        console.log("ime");
+        this.serviceAthlete.getAthleteByName(this.name).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else{
+        console.log("imeprezime");
+        this.serviceAthlete.getAthleteByNameSurname(this.name, this.surname).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }
     }else if(this.name == undefined && this.surname == undefined && this.sport != undefined){
+      console.log("sport");
       this.serviceAthlete.getAthleteBySport(this.sport).subscribe((a : Athlete[])=>{
         this.athletes = a;
         this.dataSource = new MatTableDataSource<Athlete>(a);
         this.dataSource.paginator = this.paginator;
       })
     }else if(this.name != undefined && this.surname == undefined && this.sport != undefined){
-      this.serviceAthlete.getAthleteByNameSport(this.name, this.sport).subscribe((a : Athlete[])=>{
-        this.athletes = a;
-        this.dataSource = new MatTableDataSource<Athlete>(a);
-        this.dataSource.paginator = this.paginator;
-      })
+      if(this.name == ""){
+        console.log("sport");
+        this.serviceAthlete.getAthleteBySport(this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else{
+        console.log("imesport");
+        this.serviceAthlete.getAthleteByNameSport(this.name, this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }
     }else if(this.name == undefined && this.surname != undefined && this.sport != undefined){
-      this.serviceAthlete.getAthleteBySurnameSport(this.surname, this.sport).subscribe((a : Athlete[])=>{
-        this.athletes = a;
-        this.dataSource = new MatTableDataSource<Athlete>(a);
-        this.dataSource.paginator = this.paginator;
-      })
+      if(this.surname == ""){
+        console.log("sport");
+        this.serviceAthlete.getAthleteBySport(this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else{
+        console.log("prezimesport");
+        this.serviceAthlete.getAthleteBySurnameSport(this.surname, this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }
     }else{
-      this.serviceAthlete.getAthleteByNameSurnameSport(this.name, this.surname, this.sport).subscribe((a : Athlete[])=>{
-        this.athletes = a;
-        this.dataSource = new MatTableDataSource<Athlete>(a);
-        this.dataSource.paginator = this.paginator;
-      })
+      if(this.name == "" && this.surname == ""){
+        console.log("sport");
+        this.serviceAthlete.getAthleteBySport(this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else if(this.name == "" && this.surname != ""){
+        console.log("prezimesport");
+        this.serviceAthlete.getAthleteBySurnameSport(this.surname, this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else if(this.name != "" && this.surname == ""){
+        console.log("imesport");
+        this.serviceAthlete.getAthleteByNameSport(this.name, this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }else{
+        console.log("sve");
+        this.serviceAthlete.getAthleteByNameSurnameSport(this.name, this.surname, this.sport).subscribe((a : Athlete[])=>{
+          this.athletes = a;
+          this.dataSource = new MatTableDataSource<Athlete>(a);
+          this.dataSource.paginator = this.paginator;
+        })
+      }
     }
   }
 

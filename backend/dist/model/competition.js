@@ -35,6 +35,9 @@ let Competition = new Schema({
     },
     athletes: [{
             type: String
+        }],
+    results: [{
+            type: String
         }]
 });
 exports.default = mongoose_1.default.model('Competition', Competition, 'competitions');

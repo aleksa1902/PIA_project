@@ -24,10 +24,12 @@ export class DateCompetitionComponent implements OnInit {
       this.ruter.navigate(['login']);
     }
     this.name = JSON.parse(localStorage.getItem('setDate'));
+    this.sport = JSON.parse(localStorage.getItem('setDate1'));
+    this.discipline = JSON.parse(localStorage.getItem('setDate2'));
     console.log(this.name);
 
     if(this.name){
-      this.serviceCompetition.getCompetition(this.name).subscribe((c: Competition)=>{
+      this.serviceCompetition.getCompetition(this.name, this.sport, this.discipline).subscribe((c: Competition)=>{
         this.comp = c;
         console.log(this.comp);
       })
@@ -37,6 +39,8 @@ export class DateCompetitionComponent implements OnInit {
 
   user: User;
   name: string;
+  sport: string;
+  discipline: string;
   comp: Competition;
   location: string;
   date: Date;
@@ -73,7 +77,7 @@ export class DateCompetitionComponent implements OnInit {
     
     console.log(testDate);
 
-    this.serviceCompetition.updateCompetition(this.comp.competition, this.location, testDate).subscribe(e=>{
+    this.serviceCompetition.updateCompetition(this.comp.competition, this.comp.sport, this.comp.discipline, this.location, testDate).subscribe(e=>{
       if(e['updatedComp']=='ok'){
         this.ruter.navigate(['competitionDelegate']);
       }else{

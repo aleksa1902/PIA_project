@@ -22,10 +22,12 @@ export class CompetitionResultTennisComponent implements OnInit {
       this.ruter.navigate(['login']);
     }
     let name = JSON.parse(localStorage.getItem('setResult'));
+    let sport = JSON.parse(localStorage.getItem('setResult1'));
+    let discipline = JSON.parse(localStorage.getItem('setResult2'));
     console.log(name);
 
     if(name){
-      this.serviceCompetition.getCompetition(name).subscribe((c: Competition)=>{
+      this.serviceCompetition.getCompetition(name, sport, discipline).subscribe((c: Competition)=>{
         this.competition = c;
 
         for(let i = 0; i < this.competition.athletes.length; i=i+2){
@@ -79,7 +81,7 @@ export class CompetitionResultTennisComponent implements OnInit {
 
       console.log(final);
 
-      this.serviceCompetition.updateTennisResult(this.competition.competition, final, 'tennis final').subscribe(e=>{
+      this.serviceCompetition.updateTennisResult(this.competition.competition, this.competition.sport, this.competition.discipline, final, 'tennis final').subscribe(e=>{
         if(e['updatedTennis']=='ok'){
           this.ruter.navigate(['competitionDelegate']);
         }else{
@@ -90,7 +92,7 @@ export class CompetitionResultTennisComponent implements OnInit {
     }else if(this.competition.format == 'tennis 8'){
       console.log("IDEMO U POLUFINALE");
 
-      this.serviceCompetition.updateTennisResult(this.competition.competition, winners, 'tennis 4').subscribe(e=>{
+      this.serviceCompetition.updateTennisResult(this.competition.competition, this.competition.sport, this.competition.discipline, winners, 'tennis 4').subscribe(e=>{
         if(e['updatedTennis']=='ok'){
           this.ruter.navigate(['competitionDelegate']);
         }else{
@@ -101,7 +103,7 @@ export class CompetitionResultTennisComponent implements OnInit {
     }else if(this.competition.format == 'tennis 16'){
       console.log("IDEMO U CETVRTFINALE");
 
-      this.serviceCompetition.updateTennisResult(this.competition.competition, winners, 'tennis 8').subscribe(e=>{
+      this.serviceCompetition.updateTennisResult(this.competition.competition, this.competition.sport, this.competition.discipline, winners, 'tennis 8').subscribe(e=>{
         if(e['updatedTennis']=='ok'){
           this.ruter.navigate(['competitionDelegate']);
         }else{
@@ -132,7 +134,7 @@ export class CompetitionResultTennisComponent implements OnInit {
                 if(a){
                   this.bronzeAthlete = a;
   
-                  this.serviceCompetition.updateResults(this.competition.competition, this.goldAthlete[0].country, this.silverAthlete[0].country, this.bronzeAthlete[0].country).subscribe(e=>{
+                  this.serviceCompetition.updateResults(this.competition.competition, this.competition.sport, this.competition.discipline, this.goldAthlete[0].country, this.silverAthlete[0].country, this.bronzeAthlete[0].country, this.results).subscribe(e=>{
                     if(e['medal']=='ok'){
                       console.log("KUL");
                       this.ruter.navigate(['competitionDelegate']);

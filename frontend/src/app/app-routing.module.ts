@@ -10,6 +10,7 @@ import { CompetitionResultComponent } from './competitionResult/competitionresul
 import { CompetitionResultTennisComponent } from './competitionResultTennis/competitionresulttennis.component';
 import { DateCompetitionComponent } from './dateCompetition/datecompetition.component';
 import { FindAthleteComponent } from './findAthlete/findathlete.component';
+import { FinishedCompetitionComponent } from './finishedCompetitions/finishedcompetition.component';
 import { HeadOfTheNationalDelegationComponent } from './headOfTheNationalDelegation/headofthenationaldelegation.component';
 import { HomeComponent } from './home/home.component';
 import { ListCountriesComponent } from './listCountries/listcountries.component';
@@ -37,6 +38,7 @@ const routes: Routes = [
   {path: "dateCompetition", component: DateCompetitionComponent},
   {path: "competitionResult", component: CompetitionResultComponent},
   {path: "competitionResultTennis", component: CompetitionResultTennisComponent},
+  {path: "finishedCompetition", component: FinishedCompetitionComponent},
   {path: '**', component: HomeComponent}
 ];
 

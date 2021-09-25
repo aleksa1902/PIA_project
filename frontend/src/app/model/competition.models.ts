@@ -9,4 +9,5 @@ export class Competition{
     delegate: string;
     finished: boolean;
     athletes: string[];
+    results: string[];
 }
